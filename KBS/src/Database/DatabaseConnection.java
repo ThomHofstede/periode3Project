@@ -35,19 +35,4 @@ public class DatabaseConnection {
             System.out.println(e.getMessage());
         }
     }
-    
-    public static void Disconnect() {
-        ResultSet resultSet = null;
-        Statement statement = null;
-        Connection connection = null;
-        
-        try {
-        resultSet.close();
-        statement.close();
-        connection.close();
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
 }
