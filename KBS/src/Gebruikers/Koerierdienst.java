@@ -8,10 +8,11 @@ package Gebruikers;
 public class Koerierdienst extends Gebruiker {
     private String bedrijfsnaam;
     private String koerierstatus;
-    
-    public Koerierdienst(String bedrijfsnaam, String koerierstatus) {
-        
+
+    public Koerierdienst(String gebruikersnaam, String wachtwoord, int telefoonnr) {
+        super(gebruikersnaam, wachtwoord, telefoonnr);
     }
+    
     
     public String getBedrijfsnaam() {
         return this.bedrijfsnaam;
