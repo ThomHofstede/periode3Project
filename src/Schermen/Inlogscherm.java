@@ -5,7 +5,11 @@
  */
 package Schermen;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JFrame;
+import project.MysqlConnect;
 
 /**
  *
@@ -158,7 +162,43 @@ public class Inlogscherm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    
+    if (evt.getSource() == jButton1) {
+        MysqlConnect dbconnection = new MysqlConnect();
+        
+        dbconnection.connect();
+        
+        try
+        {
+          // create our mysql database connection
+          Connection conn = dbconnection.connect();
+
+          // our SQL SELECT query. 
+          // if you only need a few columns, specify them by name instead of using "*"
+          String query = "SELECT * FROM Gebruiker";
+
+          // create the java statement
+          Statement st = conn.createStatement();
+
+          // execute the query, and get a java resultset
+          ResultSet rs = st.executeQuery(query);
+
+        
+        while (rs.next()) {
+            String g = rs.getString("gebruikersnaam");
+            String w = rs.getString("wachtwoord");
+            
+            if (jTextField1.getText().equals(g) && jPasswordField1.getText().equals(w)) {
+                System.out.println("Holy fuck het werkt");
+            }
+            else {
+                System.out.println("Gebruikersnaam en wachtwoord komen niet overeenkomen");
+            }
+        }
+        }
+        catch (Exception e) {
+            System.err.print(e.getMessage());
+        }
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
