@@ -1,5 +1,5 @@
 
-package project.tzt;
+package Schermen;
 
 import java.awt.Color;
 
@@ -7,7 +7,7 @@ import java.awt.Color;
 public class Welkomstscherm extends javax.swing.JFrame {
 
     /**
-     * Creates new form Welkomstscherm
+     * Creates new form 
      */
     public Welkomstscherm() {
         initComponents();

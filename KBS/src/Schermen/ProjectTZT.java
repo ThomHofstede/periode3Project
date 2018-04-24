@@ -1,5 +1,5 @@
 
-package project.tzt;
+package Schermen;
 
 import java.awt.FlowLayout;
 import javax.swing.JButton;
