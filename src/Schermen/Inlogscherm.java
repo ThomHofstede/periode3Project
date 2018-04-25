@@ -5,6 +5,8 @@
  */
 package Schermen;
 
+import Gebruikers.Treinkoerier;
+import Gebruikers.Koerierdienst;
 import Schermen.Dashboarden.*;
 import java.awt.Label;
 import java.sql.Connection;
@@ -12,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
 import Database.MysqlConnect;
+import Gebruikers.*;
 
 /**
  *
@@ -175,62 +178,23 @@ public class Inlogscherm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if (evt.getSource() == jButton1) {
-        MysqlConnect dbconnection = new MysqlConnect();
+        Gebruiker g = new Gebruiker(jTextField1.getText(), jPasswordField1.getText());
+        Treinkoerier tk = new Treinkoerier(jTextField1.getText(), jPasswordField1.getText());
+        Koerierdienst kd = new Koerierdienst(jTextField1.getText(), jPasswordField1.getText());
         
-        dbconnection.connect();
-        
-        try
-        {
-          // create our mysql database connection
-          Connection conn = dbconnection.connect();
-
-          // our SQL SELECT query. 
-          // if you only need a few columns, specify them by name instead of using "*"
-          String query = "SELECT * FROM Gebruiker";
-
-          // create the java statement
-          Statement st = conn.createStatement();
-
-          // execute the query, and get a java resultset
-          ResultSet rs = st.executeQuery(query);
-
-        if (jTextField1.getText().equals("") || jPasswordField1.getText().equals("")) {
-            this.FoutMelding.setVisible(true);
-        } else {
-          
-        while (rs.next()) {
-            String g = rs.getString("gebruikersnaam");
-            String w = rs.getString("wachtwoord");
-            String r = rs.getString("rol");
+        if (g.getGebruikersnaam() != null && g.getWachtwoord() != null) {
             
-            if (jTextField1.getText().equals(g) && jPasswordField1.getText().equals(w)) {
-                if (r.equals("Beheerder")) {
-                    // opent pakketlijstdashboard
-                    new Pakketlijstdashboard();
-                    this.setVisible(false);
-                    break;
-                }
-                if (r.equals("Treinkoerier")) {
-                    // opent treinkoerierdashboard
-                    new Treinkoerierdashboard();
-                    this.setVisible(false);
-                    break;
-                }
-                if (r.equals("Koerierdienst")) {
-                    // opent pakketlijstdashboard
-                    new Pakketlijstdashboard();
-                    this.setVisible(false);
-                    break;
-                }
+            // Check if it's a "Treinkoerier or Koerierdienst"
+            if (tk.getVoornaam() != null) {
+                new Treinkoerierdashboard();
+            }
+            if (kd.getBedrijfnaam() != null) {
+                new Pakketlijstdashboard();
             }
         }
+        else {
+            this.FoutMelding.setVisible(true);
         }
-        }
-        catch (Exception e) {
-            System.err.print(e.getMessage());
-        }
-    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
