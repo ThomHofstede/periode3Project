@@ -5,12 +5,13 @@
  */
 package Schermen;
 
+import Schermen.Dashboarden.*;
 import java.awt.Label;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
-import project.MysqlConnect;
+import Database.MysqlConnect;
 
 /**
  *
@@ -25,6 +26,8 @@ public class Inlogscherm extends javax.swing.JFrame {
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initComponents();
+        
+        this.FoutMelding.setVisible(false);
     }
 
     /**
@@ -44,6 +47,7 @@ public class Inlogscherm extends javax.swing.JFrame {
         jPasswordField1 = new javax.swing.JPasswordField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        FoutMelding = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TZT Post");
@@ -96,6 +100,9 @@ public class Inlogscherm extends javax.swing.JFrame {
             }
         });
 
+        FoutMelding.setForeground(new java.awt.Color(255, 0, 51));
+        FoutMelding.setText("Voer een gebruikersnaam en wachtwoord in.");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -117,7 +124,10 @@ public class Inlogscherm extends javax.swing.JFrame {
                                 .addGap(56, 56, 56)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(41, 41, 41)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(324, 324, 324)
+                        .addComponent(FoutMelding)))
                 .addContainerGap(254, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -133,7 +143,9 @@ public class Inlogscherm extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(47, 47, 47)
+                .addGap(15, 15, 15)
+                .addComponent(FoutMelding)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -183,7 +195,10 @@ public class Inlogscherm extends javax.swing.JFrame {
           // execute the query, and get a java resultset
           ResultSet rs = st.executeQuery(query);
 
-        
+        if (jTextField1.getText().equals("") || jPasswordField1.getText().equals("")) {
+            this.FoutMelding.setVisible(true);
+        } else {
+          
         while (rs.next()) {
             String g = rs.getString("gebruikersnaam");
             String w = rs.getString("wachtwoord");
@@ -191,21 +206,25 @@ public class Inlogscherm extends javax.swing.JFrame {
             
             if (jTextField1.getText().equals(g) && jPasswordField1.getText().equals(w)) {
                 if (r.equals("Beheerder")) {
-                    System.out.println("Is een beheerder");
+                    // opent pakketlijstdashboard
+                    new Pakketlijstdashboard();
+                    this.setVisible(false);
                     break;
                 }
                 if (r.equals("Treinkoerier")) {
-                    System.out.println("Is een Treinkoerier");
+                    // opent treinkoerierdashboard
+                    new Treinkoerierdashboard();
+                    this.setVisible(false);
                     break;
                 }
                 if (r.equals("Koerierdienst")) {
-                    System.out.println("Is een Koerierdienst");
+                    // opent pakketlijstdashboard
+                    new Pakketlijstdashboard();
+                    this.setVisible(false);
                     break;
                 }
             }
-            else {
-                System.out.println("Gebruikersnaam en wachtwoord komen niet overeen");
-            }
+        }
         }
         }
         catch (Exception e) {
@@ -256,6 +275,7 @@ public class Inlogscherm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel FoutMelding;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
