@@ -1,20 +1,22 @@
+package Schermen;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Schermen.Dashboarden;
+
 
 /**
  *
  * @author Olink
  */
-public class Pakketlijstdashboard extends javax.swing.JFrame {
+public class Treinkoerierdashboard extends javax.swing.JFrame {
 
     /**
-     * Creates new form Pakketlijstscherm
+     * Creates new form Dashboardtreinkoerierscherm
      */
-    public Pakketlijstdashboard() {
+    public Treinkoerierdashboard() {
         initComponents();
         
         this.setVisible(true);
@@ -33,23 +35,23 @@ public class Pakketlijstdashboard extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Test1");
+        jLabel1.setText("Test2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(169, 169, 169)
+                .addGap(174, 174, 174)
                 .addComponent(jLabel1)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
+                .addGap(134, 134, 134)
                 .addComponent(jLabel1)
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         pack();
@@ -72,13 +74,13 @@ public class Pakketlijstdashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijstdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijstdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijstdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijstdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -86,7 +88,7 @@ public class Pakketlijstdashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Pakketlijstdashboard().setVisible(true);
+                new Treinkoerierdashboard().setVisible(true);
             }
         });
     }

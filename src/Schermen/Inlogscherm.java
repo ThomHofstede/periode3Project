@@ -7,14 +7,14 @@ package Schermen;
 
 import Gebruikers.Treinkoerier;
 import Gebruikers.Koerierdienst;
-import Schermen.Dashboarden.*;
 import java.awt.Label;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
-import Database.MysqlConnect;
+import project.MysqlConnect;
 import Gebruikers.*;
+import project.MysqlConnect;
 
 /**
  *
@@ -104,7 +104,7 @@ public class Inlogscherm extends javax.swing.JFrame {
         });
 
         FoutMelding.setForeground(new java.awt.Color(255, 0, 51));
-        FoutMelding.setText("Voer een gebruikersnaam en wachtwoord in.");
+        FoutMelding.setText("Kan niet inloggen? Neem contact op met de klantenservice: 0639393843");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,7 +129,7 @@ public class Inlogscherm extends javax.swing.JFrame {
                                 .addGap(41, 41, 41)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(324, 324, 324)
+                        .addGap(257, 257, 257)
                         .addComponent(FoutMelding)))
                 .addContainerGap(254, Short.MAX_VALUE))
         );
@@ -146,9 +146,9 @@ public class Inlogscherm extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
-                .addComponent(FoutMelding)
                 .addGap(18, 18, 18)
+                .addComponent(FoutMelding)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))

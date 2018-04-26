@@ -1,7 +1,7 @@
 
 package Gebruikers;
 
-import Database.MysqlConnect;
+import project.MysqlConnect;
 import Gebruikers.Gebruiker;
 import java.sql.Connection;
 import java.sql.ResultSet;
