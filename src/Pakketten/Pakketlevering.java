@@ -9,17 +9,17 @@ import java.util.*;
  */
 public class Pakketlevering extends Pakket {
     private ArrayList<Pakket> pakket;
-    private String deadline;
+    private Date deadline;
     private int oplevering;
     private Date datum;
     private Date vertrektijd;
     private Date aankomsttijd;
-    
-    public Pakketlevering() {
-        
-    }
 
-    public String getDeadline() {
+    public Pakketlevering(String treinkoerier) {
+        super(treinkoerier);
+    }
+    
+    public Date getDeadline() {
         return deadline;
     }
 

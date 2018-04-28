@@ -12,9 +12,8 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JFrame;
-import project.MysqlConnect;
+import Database.MysqlConnect;
 import Gebruikers.*;
-import project.MysqlConnect;
 
 /**
  *
