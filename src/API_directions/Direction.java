@@ -14,10 +14,11 @@ import org.json.simple.JSONArray;
  */
 public class Direction{
     
-    private String origin;
-    private String destination;
-    private String mode;
-    private String APIKey;
+    private final String origin;
+    private final String destination;
+    private final String mode;
+    private final String APIKey;
+    private final double minDistanceInMeters = 25000.5;
     private Request req;
     private JSONObject result;
         
@@ -85,5 +86,9 @@ public class Direction{
         }
         
         return duration;
+    }
+    
+    public boolean isProfitable(){
+        return this.getTravelDistance() > minDistanceInMeters;
     }
 }
