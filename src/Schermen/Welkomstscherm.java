@@ -83,7 +83,7 @@ public class Welkomstscherm extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/project/tzt/Afbeeldingen/logoTzt.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/logoTzt.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
         jLabel5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
