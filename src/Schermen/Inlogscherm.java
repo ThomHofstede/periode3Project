@@ -185,10 +185,12 @@ public class Inlogscherm extends javax.swing.JFrame {
             
             // Check if it's a "Treinkoerier or Koerierdienst"
             if (tk.getVoornaam() != null) {
-                new Treinkoerierdashboard();
+                new Treinkoerierdashboard(jTextField1.getText());
+                this.setVisible(false);
             }
             if (kd.getBedrijfnaam() != null) {
                 new Pakketlijstdashboard();
+                this.setVisible(false);
             }
         }
         else {

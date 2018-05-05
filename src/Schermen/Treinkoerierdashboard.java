@@ -12,12 +12,14 @@ package Schermen;
  * @author Olink
  */
 public class Treinkoerierdashboard extends javax.swing.JFrame {
+    private String gebruikersnaam;
 
     /**
      * Creates new form Dashboardtreinkoerierscherm
      */
-    public Treinkoerierdashboard() {
+    public Treinkoerierdashboard(String gebruikersnaam) {
         initComponents();
+        this.gebruikersnaam = gebruikersnaam;
         
         this.setVisible(true);
     }
@@ -32,30 +34,50 @@ public class Treinkoerierdashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        status_pakket_scherm_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Test2");
+
+        status_pakket_scherm_button.setText("Status_pakket_scherm");
+        status_pakket_scherm_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                status_pakket_scherm_buttonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(jLabel1)
-                .addContainerGap(199, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(123, 123, 123)
+                        .addComponent(status_pakket_scherm_button)))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(134, 134, 134)
                 .addComponent(jLabel1)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(status_pakket_scherm_button)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void status_pakket_scherm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_pakket_scherm_buttonActionPerformed
+        Status_pakket_scherm sps = new Status_pakket_scherm(this.gebruikersnaam);
+        this.setVisible(false);
+    }//GEN-LAST:event_status_pakket_scherm_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,12 +110,12 @@ public class Treinkoerierdashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Treinkoerierdashboard().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton status_pakket_scherm_button;
     // End of variables declaration//GEN-END:variables
 }

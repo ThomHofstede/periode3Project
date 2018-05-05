@@ -1,6 +1,7 @@
 
 package Schermen;
 
+import Gebruikers.Treinkoerier;
 import Pakketten.Pakket;
 import javax.swing.*;
 
@@ -9,19 +10,23 @@ import javax.swing.*;
  * @author Olink
  */
 public class Status_pakket_scherm extends javax.swing.JFrame {
+    private String gebruikersnaam;
 
     /**
      * Creates new form Status_pakket_scherm
      */
-    public Status_pakket_scherm() {
+    public Status_pakket_scherm(String gebruikersnaam) {
         initComponents();
         
-        Pakket p = new Pakket("Colin");
+        this.gebruikersnaam = gebruikersnaam;
+        
+        Pakket p = new Pakket(this.gebruikersnaam);
         
         this.jpakketid.setText("Status pakket #" + p.getPakketId());
-        this.jkoerier.setText("Koerier: " + p.getTreinkoerier());
-        
-        
+        this.jkoerier.setText("Koerier: " + p.getGebruikersnaam());
+        this.jafgeleverdbutton.setSelected(p.getAfgeleverd());
+        this.jopgehaaldbutton.setSelected(p.getOpgehaald());
+        this.jbincident.setSelected(p.getIncident());
         
         this.setVisible(true);
     }
@@ -45,9 +50,14 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         jafgeleverd = new javax.swing.JLabel();
         jopgehaaldbutton = new javax.swing.JRadioButton();
         jafgeleverdbutton = new javax.swing.JRadioButton();
+        jincident = new javax.swing.JLabel();
+        jbincident = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jbopslaan = new javax.swing.JButton();
+        jbterug = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1193, 579));
 
         jpakketid.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jpakketid.setText("jpakketid");
@@ -58,15 +68,37 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
 
         jafgeleverd.setText("Afgeleverd:");
 
-        jopgehaaldbutton.setText("jRadioButton1");
+        buttonGroup1.add(jopgehaaldbutton);
+        jopgehaaldbutton.setToolTipText("");
         jopgehaaldbutton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jopgehaaldbutton.addActionListener(new java.awt.event.ActionListener() {
+
+        buttonGroup1.add(jafgeleverdbutton);
+
+        jincident.setText("Incident");
+        jincident.setToolTipText("");
+
+        buttonGroup1.add(jbincident);
+        jbincident.setToolTipText("");
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setText("beschrijving...");
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jbopslaan.setText("Opslaan");
+        jbopslaan.setToolTipText("");
+        jbopslaan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jopgehaaldbuttonActionPerformed(evt);
+                jbopslaanActionPerformed(evt);
             }
         });
 
-        jafgeleverdbutton.setText("jRadioButton2");
+        jbterug.setText("Terug");
+        jbterug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbterugActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -85,12 +117,20 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jopgehaald, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jafgeleverd))
+                                    .addComponent(jafgeleverd)
+                                    .addComponent(jincident))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jafgeleverdbutton)
-                                    .addComponent(jopgehaaldbutton))))))
-                .addContainerGap(903, Short.MAX_VALUE))
+                                    .addComponent(jopgehaaldbutton)
+                                    .addComponent(jbincident)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(jbopslaan)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jbterug))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(607, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,15 +149,39 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jafgeleverd)
                     .addComponent(jafgeleverdbutton))
-                .addContainerGap(351, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jincident)
+                    .addComponent(jbincident))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbopslaan)
+                    .addComponent(jbterug))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jopgehaaldbuttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jopgehaaldbuttonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jopgehaaldbuttonActionPerformed
+    private void jbopslaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbopslaanActionPerformed
+        Pakket p = new Pakket(this.gebruikersnaam);
+        if (this.jopgehaaldbutton.isSelected()) {
+            p.updatePakket(gebruikersnaam, "opgehaald");
+        }
+        if (this.jafgeleverdbutton.isSelected()) {
+            p.updatePakket(gebruikersnaam, "afgeleverd");
+        }
+        if (this.jbincident.isSelected()) {
+            p.updatePakket(gebruikersnaam, "incident", this.jTextArea1.getText());
+        }
+    }//GEN-LAST:event_jbopslaanActionPerformed
+
+    private void jbterugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbterugActionPerformed
+        Treinkoerierdashboard tkdb = new Treinkoerierdashboard(this.gebruikersnaam);
+        this.setVisible(false);
+    }//GEN-LAST:event_jbterugActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,7 +213,6 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Status_pakket_scherm().setVisible(true);
             }
         });
     }
@@ -159,8 +222,14 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jafgeleverd;
     private javax.swing.JRadioButton jafgeleverdbutton;
+    private javax.swing.JRadioButton jbincident;
+    private javax.swing.JButton jbopslaan;
+    private javax.swing.JButton jbterug;
+    private javax.swing.JLabel jincident;
     private javax.swing.JLabel jkoerier;
     private javax.swing.JLabel jopgehaald;
     private javax.swing.JRadioButton jopgehaaldbutton;
