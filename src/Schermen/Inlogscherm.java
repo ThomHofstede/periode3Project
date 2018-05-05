@@ -177,23 +177,27 @@ public class Inlogscherm extends javax.swing.JFrame {
     }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Gebruiker g = new Gebruiker(jTextField1.getText(), jPasswordField1.getText());
-        Treinkoerier tk = new Treinkoerier(jTextField1.getText(), jPasswordField1.getText());
-        Koerierdienst kd = new Koerierdienst(jTextField1.getText(), jPasswordField1.getText());
         
-        if (g.getGebruikersnaam() != null && g.getWachtwoord() != null) {
+        //Gebruikers worden aangemaakt om te controleren welke rol bij de gebruikersnaam past
+        Gebruiker g = new Gebruiker();
+        Treinkoerier tk = new Treinkoerier();
+        Koerierdienst kd = new Koerierdienst();
+        
+        //Controle of gebruikersnaam en wachtwoord overeenkomen
+        if (g.Inloggen(this.jTextField1.getText(), this.jPasswordField1.getText())) {
             
-            // Check if it's a "Treinkoerier or Koerierdienst"
-            if (tk.getVoornaam() != null) {
+            // Controleren of het een treinkoerier of koerierdienst is
+            if (tk.controleerRol(this.jTextField1.getText())) {
                 new Treinkoerierdashboard(jTextField1.getText());
                 this.setVisible(false);
             }
-            if (kd.getBedrijfnaam() != null) {
+            if (kd.controleerRol(this.jTextField1.getText())) {
                 new Pakketlijstdashboard();
                 this.setVisible(false);
             }
         }
         else {
+            //Foutmelding weergeven als wachtwoord en gebruikersnaam niet overeenkomen
             this.FoutMelding.setVisible(true);
         }
     }//GEN-LAST:event_jButton1ActionPerformed

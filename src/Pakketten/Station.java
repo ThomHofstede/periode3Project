@@ -5,13 +5,11 @@ package Pakketten;
  *
  * @author Olink
  */
-class Station extends Pakket {
+class Station {
     private String naam;
     private String kiosklocatie;
-
-    public Station(String treinkoerier) {
-        super(treinkoerier);
-    }
+    
+    //Gebruik maken van API om kiosk en stationsnaam op te halen?
     
     public String getNaam() {
         return this.naam;

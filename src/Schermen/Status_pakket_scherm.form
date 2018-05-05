@@ -58,6 +58,8 @@
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jbopslaan" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="jwijzigingopgeslagen" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jbterug" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -100,6 +102,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbopslaan" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jbterug" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jwijzigingopgeslagen" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="86" max="32767" attributes="0"/>
           </Group>
@@ -171,11 +174,12 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="jTextArea1">
+        <Component class="javax.swing.JTextArea" name="jstatus_beschrijving">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
             <Property name="text" type="java.lang.String" value="beschrijving..."/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
         </Component>
       </SubComponents>
@@ -196,6 +200,14 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbterugActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jwijzigingopgeslagen">
+      <Properties>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="33" green="33" red="ff" type="rgb"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Wijzigingen zijn  opgeslagen!"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

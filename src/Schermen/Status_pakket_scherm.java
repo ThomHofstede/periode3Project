@@ -22,11 +22,14 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         
         Pakket p = new Pakket(this.gebruikersnaam);
         
+        //Set de texten en radiobuttons op de juiste wijze van pakketID
         this.jpakketid.setText("Status pakket #" + p.getPakketId());
         this.jkoerier.setText("Koerier: " + p.getGebruikersnaam());
         this.jafgeleverdbutton.setSelected(p.getAfgeleverd());
         this.jopgehaaldbutton.setSelected(p.getOpgehaald());
         this.jbincident.setSelected(p.getIncident());
+        
+        this.jwijzigingopgeslagen.setVisible(false);
         
         this.setVisible(true);
     }
@@ -53,9 +56,10 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         jincident = new javax.swing.JLabel();
         jbincident = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jstatus_beschrijving = new javax.swing.JTextArea();
         jbopslaan = new javax.swing.JButton();
         jbterug = new javax.swing.JButton();
+        jwijzigingopgeslagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,10 +84,11 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         buttonGroup1.add(jbincident);
         jbincident.setToolTipText("");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("beschrijving...");
-        jScrollPane1.setViewportView(jTextArea1);
+        jstatus_beschrijving.setColumns(20);
+        jstatus_beschrijving.setRows(5);
+        jstatus_beschrijving.setText("beschrijving...");
+        jstatus_beschrijving.setToolTipText("");
+        jScrollPane1.setViewportView(jstatus_beschrijving);
 
         jbopslaan.setText("Opslaan");
         jbopslaan.setToolTipText("");
@@ -99,6 +104,9 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                 jbterugActionPerformed(evt);
             }
         });
+
+        jwijzigingopgeslagen.setForeground(new java.awt.Color(255, 51, 51));
+        jwijzigingopgeslagen.setText("Wijzigingen zijn  opgeslagen!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -127,6 +135,8 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jbopslaan)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jwijzigingopgeslagen)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jbterug))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))))
@@ -158,7 +168,8 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbopslaan)
-                    .addComponent(jbterug))
+                    .addComponent(jbterug)
+                    .addComponent(jwijzigingopgeslagen))
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -166,15 +177,19 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbopslaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbopslaanActionPerformed
+        //Updaten pakket's informatie gebasseerd op de aangevinkte radiobuttons
         Pakket p = new Pakket(this.gebruikersnaam);
         if (this.jopgehaaldbutton.isSelected()) {
             p.updatePakket(gebruikersnaam, "opgehaald");
+            this.jwijzigingopgeslagen.setVisible(true);
         }
         if (this.jafgeleverdbutton.isSelected()) {
             p.updatePakket(gebruikersnaam, "afgeleverd");
+            this.jwijzigingopgeslagen.setVisible(true);
         }
         if (this.jbincident.isSelected()) {
-            p.updatePakket(gebruikersnaam, "incident", this.jTextArea1.getText());
+            p.updatePakket(gebruikersnaam, "incident", this.jstatus_beschrijving.getText());
+            this.jwijzigingopgeslagen.setVisible(true);
         }
     }//GEN-LAST:event_jbopslaanActionPerformed
 
@@ -223,7 +238,6 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JLabel jafgeleverd;
     private javax.swing.JRadioButton jafgeleverdbutton;
     private javax.swing.JRadioButton jbincident;
@@ -234,5 +248,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
     private javax.swing.JLabel jopgehaald;
     private javax.swing.JRadioButton jopgehaaldbutton;
     private javax.swing.JLabel jpakketid;
+    private javax.swing.JTextArea jstatus_beschrijving;
+    private javax.swing.JLabel jwijzigingopgeslagen;
     // End of variables declaration//GEN-END:variables
 }

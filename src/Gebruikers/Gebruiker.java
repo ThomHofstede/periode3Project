@@ -14,7 +14,7 @@ public class Gebruiker {
     private String gebruikersnaam;
     private String wachtwoord;
     
-    public Gebruiker(String gebruikersnaam, String wachtwoord) {
+    public boolean Inloggen(String gebruikersnaam, String wachtwoord) {
         MysqlConnect dbconn = new MysqlConnect();
         
         try {     
@@ -36,15 +36,14 @@ public class Gebruiker {
               String w = rs.getString("wachtwoord");
               
               if (g.equals(gebruikersnaam) && w.equals(wachtwoord)) {
-                  this.gebruikersnaam = g;
-                  this.wachtwoord = w;
+                  return true;
               }
           }
         }
         catch (Exception e) {
             System.err.println(e.getMessage());
         }
-        
+        return false;
     }
     
     public String getGebruikersnaam() {

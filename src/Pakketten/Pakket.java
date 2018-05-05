@@ -10,11 +10,13 @@ import java.sql.Statement;
  *
  * @author Olink
  */
-public class Pakket {
+public class Pakket extends Station {
     private int pakketid;
     private String pakketstatus;
-    private String beschrijving_status;
+    private String status_beschrijving;
     private String gebruikersnaam;
+    private Station vertrek;
+    private Station aankomst;
     
     public Pakket(String gebruikersnaam) {
         MysqlConnect dbconn = new MysqlConnect();
@@ -116,11 +118,7 @@ public class Pakket {
             return true;
         }
         return false;
-    }
-    
-    public void setBeschrijvingstatus(String beschrijving_status) {
-        this.beschrijving_status = beschrijving_status;
-    }
+    }  
     
     public int getPakketId() {
         return this.pakketid;
@@ -130,11 +128,11 @@ public class Pakket {
         return this.pakketstatus;
     }
     
-    public void setPakketStatus() {
-        this.pakketstatus = pakketstatus;
-    }
-    
     public String getGebruikersnaam() {
         return this.gebruikersnaam;
+    }
+    
+    public String getStatus_Beschrijving() {
+        return this.status_beschrijving;
     }
 }
