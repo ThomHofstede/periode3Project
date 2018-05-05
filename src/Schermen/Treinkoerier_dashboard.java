@@ -11,13 +11,13 @@ package Schermen;
  *
  * @author Olink
  */
-public class Treinkoerierdashboard extends javax.swing.JFrame {
+public class Treinkoerier_dashboard extends javax.swing.JFrame {
     private String gebruikersnaam;
 
     /**
      * Creates new form Dashboardtreinkoerierscherm
      */
-    public Treinkoerierdashboard(String gebruikersnaam) {
+    public Treinkoerier_dashboard(String gebruikersnaam) {
         initComponents();
         this.gebruikersnaam = gebruikersnaam;
         
@@ -96,14 +96,16 @@ public class Treinkoerierdashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerier_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerier_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerier_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Treinkoerierdashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Treinkoerier_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

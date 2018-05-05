@@ -194,7 +194,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
     }//GEN-LAST:event_jbopslaanActionPerformed
 
     private void jbterugActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbterugActionPerformed
-        Treinkoerierdashboard tkdb = new Treinkoerierdashboard(this.gebruikersnaam);
+        Treinkoerier_dashboard tkdb = new Treinkoerier_dashboard(this.gebruikersnaam);
         this.setVisible(false);
     }//GEN-LAST:event_jbterugActionPerformed
 

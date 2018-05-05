@@ -188,11 +188,11 @@ public class Inlogscherm extends javax.swing.JFrame {
             
             // Controleren of het een treinkoerier of koerierdienst is
             if (tk.controleerRol(this.jTextField1.getText())) {
-                new Treinkoerierdashboard(jTextField1.getText());
+                new Treinkoerier_dashboard(jTextField1.getText());
                 this.setVisible(false);
             }
             if (kd.controleerRol(this.jTextField1.getText())) {
-                new Pakketlijstdashboard();
+                new Pakketlijst_dashboard(this.jTextField1.getText());
                 this.setVisible(false);
             }
         }

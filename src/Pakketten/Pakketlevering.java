@@ -1,6 +1,10 @@
 
 package Pakketten;
 
+import Database.MysqlConnect;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.*;
 
 /**
@@ -15,10 +19,10 @@ public class Pakketlevering extends Pakket {
     private Date vertrektijd;
     private Date aankomsttijd;
 
-    public Pakketlevering(String treinkoerier) {
-        super(treinkoerier);
+    public Pakketlevering(String gebruikersnaam) {
+        super(gebruikersnaam);
     }
-    
+
     public Date getDeadline() {
         return deadline;
     }
