@@ -10,9 +10,8 @@ public class ProjectTZT {
 
 
     public static void main(String[] args) {
-        Welkomstscherm welkomstscherm = new Welkomstscherm();
-        welkomstscherm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        welkomstscherm.setVisible(true);
+        
+        new Hoofdscherm().setVisible(true);
     }
     /*private JButton login, registreer;
     
