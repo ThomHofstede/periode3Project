@@ -85,14 +85,14 @@ public class Inlogscherm extends javax.swing.JFrame {
         FoutMelding.setForeground(new java.awt.Color(255, 0, 51));
         FoutMelding.setText("Kan niet inloggen? Neem contact op met de klantenservice: 0639393843");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jeffrey\\Documents\\NetBeansProjects\\KBS\\src\\kbs\\schermontwerpen\\periode3Project\\src\\Schermen\\Afbeeldingen\\LoginInlogscherm.png")); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/LoginInlogscherm.png"))); // NOI18N
         jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel4MouseClicked(evt);
             }
         });
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jeffrey\\Documents\\NetBeansProjects\\KBS\\src\\kbs\\schermontwerpen\\periode3Project\\src\\Schermen\\Afbeeldingen\\TerugInlogscherm.png")); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/TerugInlogscherm.png"))); // NOI18N
         jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel5MouseClicked(evt);
