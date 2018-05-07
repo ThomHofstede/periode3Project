@@ -74,6 +74,9 @@ public class Hoofdscherm extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel6MouseEntered(evt);
+            }
         });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/RegistrerenHoofdscherm.png"))); // NOI18N
@@ -171,6 +174,10 @@ public class Hoofdscherm extends javax.swing.JFrame {
             e.printStackTrace();
         }
     }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
+        
+    }//GEN-LAST:event_jLabel6MouseEntered
 
     /**
      * @param args the command line arguments
