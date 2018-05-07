@@ -53,7 +53,7 @@ public class Hoofdscherm extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(1400, 800));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jeffrey\\Downloads\\logoTzt.jpg")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/logoTzt.jpg"))); // NOI18N
 
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -67,16 +67,16 @@ public class Hoofdscherm extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jeffrey\\Documents\\NetBeansProjects\\KBS\\src\\kbs\\schermontwerpen\\periode3Project\\src\\Schermen\\Afbeeldingen\\skyline.png")); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/skyline.png"))); // NOI18N
 
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jeffrey\\Documents\\NetBeansProjects\\KBS\\src\\kbs\\schermontwerpen\\periode3Project\\src\\Schermen\\Afbeeldingen\\LoginHoofdscherm.png")); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/LoginHoofdscherm.png"))); // NOI18N
         jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel6MouseClicked(evt);
             }
         });
 
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jeffrey\\Documents\\NetBeansProjects\\KBS\\src\\kbs\\schermontwerpen\\periode3Project\\src\\Schermen\\Afbeeldingen\\RegistrerenHoofdscherm.png")); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/RegistrerenHoofdscherm.png"))); // NOI18N
         jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel7MouseClicked(evt);
