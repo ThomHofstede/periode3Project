@@ -62,6 +62,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         jwijzigingopgeslagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1400, 800));
 
         jpakketid.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jpakketid.setText("jpakketid");
@@ -140,7 +141,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jbterug))
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(607, Short.MAX_VALUE))
+                .addContainerGap(814, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +171,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                     .addComponent(jbopslaan)
                     .addComponent(jbterug)
                     .addComponent(jwijzigingopgeslagen))
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(291, Short.MAX_VALUE))
         );
 
         pack();
