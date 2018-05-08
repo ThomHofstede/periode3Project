@@ -2,7 +2,7 @@
 package Schermen;
 
 import Gebruikers.Treinkoerier;
-import Pakketten.Pakket;
+import Pakketten.Pakketlevering;
 import javax.swing.*;
 
 /**
@@ -20,7 +20,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         
         this.gebruikersnaam = gebruikersnaam;
         
-        Pakket p = new Pakket(this.gebruikersnaam);
+        Pakketlevering p = new Pakketlevering(this.gebruikersnaam);
         
         //Set de texten en radiobuttons op de juiste wijze van pakketID
         this.jpakketid.setText("Status pakket #" + p.getPakketId());
@@ -30,6 +30,8 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         this.jbincident.setSelected(p.getIncident());
         
         this.jwijzigingopgeslagen.setVisible(false);
+        
+        p.getRol();
         
         this.setVisible(true);
     }
@@ -179,17 +181,17 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
 
     private void jbopslaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbopslaanActionPerformed
         //Updaten pakket's informatie gebasseerd op de aangevinkte radiobuttons
-        Pakket p = new Pakket(this.gebruikersnaam);
+        Pakketlevering p = new Pakketlevering(this.gebruikersnaam);
         if (this.jopgehaaldbutton.isSelected()) {
-            p.updatePakket(gebruikersnaam, "opgehaald");
+            p.updatePakket(p.getRol(), "opgehaald");
             this.jwijzigingopgeslagen.setVisible(true);
         }
         if (this.jafgeleverdbutton.isSelected()) {
-            p.updatePakket(gebruikersnaam, "afgeleverd");
+            p.updatePakket(p.getRol(), "afgeleverd");
             this.jwijzigingopgeslagen.setVisible(true);
         }
         if (this.jbincident.isSelected()) {
-            p.updatePakket(gebruikersnaam, "incident", this.jstatus_beschrijving.getText());
+            p.updatePakket(p.getRol(), "incident", this.jstatus_beschrijving.getText());
             this.jwijzigingopgeslagen.setVisible(true);
         }
     }//GEN-LAST:event_jbopslaanActionPerformed

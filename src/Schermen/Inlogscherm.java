@@ -179,6 +179,7 @@ public class Inlogscherm extends javax.swing.JFrame {
         Gebruiker g = new Gebruiker();
         Treinkoerier tk = new Treinkoerier();
         Koerierdienst kd = new Koerierdienst();
+        Fietskoerier fiets = new Fietskoerier();
         
         //Controle of gebruikersnaam en wachtwoord overeenkomen
         if (g.Inloggen(this.jTextField1.getText(), this.jPasswordField1.getText())) {
@@ -190,6 +191,10 @@ public class Inlogscherm extends javax.swing.JFrame {
             }
             if (kd.controleerRol(this.jTextField1.getText())) {
                 new Pakketlijst_dashboard(this.jTextField1.getText());
+                this.setVisible(false);
+            }
+            if (fiets.controleerRol(this.jTextField1.getText())) {
+                new Status_pakket_scherm(this.jTextField1.getText());
                 this.setVisible(false);
             }
         }
