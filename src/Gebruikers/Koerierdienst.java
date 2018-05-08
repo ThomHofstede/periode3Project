@@ -12,9 +12,7 @@ import java.sql.Statement;
  */
 public class Koerierdienst extends Gebruiker {
     private String gebruikersnaam;
-    private String bedrijfnaam;
     private String koerierstatus;
-    private int telefoonnr;
 
     public Koerierdienst() {
     }
@@ -38,14 +36,11 @@ public class Koerierdienst extends Gebruiker {
           
           while (rs.next()) {
               String g = rs.getString("gebruikersnaam");
-              String bn = rs.getString("bedrijfnaam");
               String k = rs.getString("koerierstatus");
-              int telnr = rs.getInt("telefoonnr");
               
               if (g.equals(gebruikersnaam)) {
-                  this.bedrijfnaam = bn;
                   this.koerierstatus = k;
-                  this.telefoonnr = telnr;
+                  this.gebruikersnaam = gebruikersnaam;
                   return true;
               }
           }
@@ -58,10 +53,6 @@ public class Koerierdienst extends Gebruiker {
         return false;
     }
     
-    public String getBedrijfnaam() {
-        return this.bedrijfnaam;
-    }
-    
     public String getKoerierstatus() {
         return this.koerierstatus;
     }
@@ -70,8 +61,5 @@ public class Koerierdienst extends Gebruiker {
         this.koerierstatus = koerierstatus;
     }
     
-    public int getTelefoonnr() {
-        return this.telefoonnr;
-    }
     
 }
