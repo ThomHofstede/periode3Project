@@ -24,7 +24,7 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         
         //Set de texten en radiobuttons op de juiste wijze van pakketID
         this.jpakketid.setText("Status pakket #" + p.getPakketId());
-        this.jkoerier.setText("Koerier: " + p.getGebruikersnaam());
+        this.jkoerier.setText("Koerier: " + this.gebruikersnaam);
         this.jafgeleverdbutton.setSelected(p.getAfgeleverd());
         this.jopgehaaldbutton.setSelected(p.getOpgehaald());
         this.jbincident.setSelected(p.getIncident());

@@ -99,7 +99,7 @@ public class Pakketlevering {
           Connection conn = dbconn.connect();
           
           if (this.rol.equals("fiets")) {
-          String query = "UPDATE Pakket SET pakketstatus = " + "'" + pakketstatus + "(fiets)', " + "status_beschrijving = " + "'" + status_beschrijving + "'" + " WHERE pakketID = " + "'" + pakketid + "'";
+          String query = "UPDATE Pakket SET pakketstatus = " + "'" + pakketstatus + " (fiets)', " + "status_beschrijving = " + "'" + status_beschrijving + "'" + " WHERE pakketID = " + "'" + pakketid + "'";
 
           Statement st = conn.createStatement();
 
@@ -107,7 +107,7 @@ public class Pakketlevering {
           }
           
           if (this.rol.equals("trein")) {
-          String query = "UPDATE Pakket SET pakketstatus = " + "'" + pakketstatus + "(trein)', " + "status_beschrijving = " + "'" + status_beschrijving + "'" + " WHERE pakketID = " + "'" + pakketid + "'";
+          String query = "UPDATE Pakket SET pakketstatus = " + "'" + pakketstatus + " (trein)', " + "status_beschrijving = " + "'" + status_beschrijving + "'" + " WHERE pakketID = " + "'" + pakketid + "'";
 
           Statement st = conn.createStatement();
 
@@ -121,21 +121,21 @@ public class Pakketlevering {
     }
     
     public boolean getOpgehaald() {
-        if (this.pakketstatus.equals("opgehaald")) {
+        if (this.pakketstatus.equals("opgehaald (trein") || this.pakketstatus.equals("opgehaald (fiets)")) {
             return true;
         }
         return false;
     }
     
     public boolean getAfgeleverd() {
-        if (this.pakketstatus.equals("afgeleverd")) {
+        if (this.pakketstatus.equals("afgeleverd (trein)") || this.pakketstatus.equals("afgeleverd (fiets)")) {
             return true;
         }
         return false;
     }
     
     public boolean getIncident() {
-        if (this.pakketstatus.equals("incident")) {
+        if (this.pakketstatus.equals("incident (trein)") || this.pakketstatus.equals("incident (fiets)")) {
             return true;
         }
         return false;

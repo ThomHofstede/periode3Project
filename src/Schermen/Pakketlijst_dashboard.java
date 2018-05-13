@@ -6,12 +6,22 @@
 package Schermen;
 
 import Database.MysqlConnect;
+import java.awt.Color;
 import static java.lang.reflect.Array.set;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import java.util.List;
+import javax.swing.SortOrder;
 
 /**
  *
@@ -33,16 +43,26 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
     
     public void pakketArray() {
         DefaultTableModel dtm1 = (DefaultTableModel)jTable1.getModel();
+        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.jTable1.getModel());
+        this.jTable1.setRowSorter(sorter);
+        
+        List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
+        sortKeys.add(new RowSorter.SortKey(4, SortOrder.ASCENDING));
+        sortKeys.add(new RowSorter.SortKey(0, SortOrder.ASCENDING));
+        sorter.setSortKeys(sortKeys);
         
         MysqlConnect dbconn = new MysqlConnect();
         
-        try {     
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            Date currentdate = new Date(dtf.format(now));
         // create our mysql database connection
           Connection conn = dbconn.connect();
 
           // our SQL SELECT query. 
           // if you only need a few columns, specify them by name instead of using "*"
-          String query = "SELECT * FROM Pakketlevering AS pl INNER JOIN Pakket AS p ON pl.pakketID=p.pakketID";
+          String query = "SELECT * FROM Pakketlevering AS pl INNER JOIN Pakket AS p ON pl.pakketID=p.pakketID JOIN Treinkoerier AS T ON pl.treinkoerier=T.gebruikersnaam";
 
           // create the java statement
           Statement st = conn.createStatement();
@@ -51,17 +71,26 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
           ResultSet rs = st.executeQuery(query);
           
           while (rs.next()) {
+              
               int pi = rs.getInt("pakketID");
               String trein = rs.getString("treinkoerier");
               String fiets = rs.getString("fietskoerier");
               String d = rs.getString("deadline");
+              
+              Date date = rs.getDate("deadline");
+              
               int o = rs.getInt("oplevering");
               String vs = rs.getString("vertrekstation");
               String as = rs.getString("aankomststation");
               String ps = rs.getString("pakketstatus");
               String sb = rs.getString("status_beschrijving");
+              int t = rs.getInt("telefoonnr");
               
-              dtm1.addRow(new Object[] {pi, trein, fiets, d, o + " euro", vs, as, ps, sb});
+              if (date.before(currentdate)) {
+                  dtm1.addRow(new Object[] {pi, trein, t, fiets, "over deadline!", o + " euro", vs, as, ps, sb});
+              } else {
+                  dtm1.addRow(new Object[] {pi, trein, t, fiets, d, o + " euro", vs, as, ps, sb});
+              }
           }
         }
         catch (Exception e) {
@@ -109,9 +138,17 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Pakket ID", "Treinkoerier", "Fietskoerier", "Deadline", "Oplevering", "Vertrekstation", "Aankomststation", "Pakketstatus", "Status_beschrijving"
+                "Pakket ID", "Treinkoerier", "telefoonnr", "Fietskoerier", "Deadline", "Oplevering", "Vertrekstation", "Aankomststation", "Pakketstatus", "Status_beschrijving"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane4.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -119,18 +156,18 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(568, 568, 568)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(621, 621, 621)
-                        .addComponent(jLabel6)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(621, 621, 621)
+                        .addComponent(jLabel6))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(568, 568, 568)
+                        .addComponent(jLabel4)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
