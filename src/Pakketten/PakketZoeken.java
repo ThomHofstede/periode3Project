@@ -30,16 +30,16 @@ public class PakketZoeken {
             
             Statement stmt = (Statement) conn.createStatement();
             
-            String eind = "";
-            String begin = "";
-            String datum = "";
+            String eind = "Alkmaar";
+            String begin = "Amsterdam";
+            String datum = "00-00-00";
             
-            String query = "SELECT * FROM Pakketlevering WHERE vertrekstation = '" + begin + "' AND aankomststation = '" + eind + "' AND deadline = '" + datum + "';";
+            String query = "SELECT * FROM pakketlevering WHERE vertrekstation =  " + "'" + begin + "'" +  "OR aankomststation = " + "'" + eind + "'" + "OR deadline LIKE "+ "'" + datum + "%';";
             
             ResultSet rs = stmt.executeQuery(query);
             
             while (rs.next()) {
-                System.out.println(rs.getString(begin));
+                System.out.println("test" + rs.getString(begin));
                 System.out.println(rs.getString(eind));
                 System.out.println(rs.getString(datum));
             }
