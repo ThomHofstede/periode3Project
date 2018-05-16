@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -61,7 +63,7 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
               Date date = rs.getDate("deadline");
               
               if (date.after(currentdate)) {
-                  dtm1.addRow(new Object[] {"Pakket " + p});
+                  dtm1.addRow(new Object[] {p});
               } 
           }
         }
@@ -72,7 +74,6 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
         
         
     }
-    
     
     
     
@@ -157,6 +158,11 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
             }
         });
         jTable3.setRowHeight(25);
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable3);
         if (jTable3.getColumnModel().getColumnCount() > 0) {
             jTable3.getColumnModel().getColumn(0).setResizable(false);
@@ -214,6 +220,21 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        int index = jTable3.getSelectedRow();
+        TableModel model = jTable3.getModel();
+        
+        String tester =  model.getValueAt(index, 0).toString();
+        
+
+        StatusPakket jtRowData = new StatusPakket(tester, this.gebruikersnaam);
+
+        jtRowData.setVisible(true);
+        jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jTable3MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -259,4 +280,5 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
     private String gebruikersnaam;
+    private int pakketID;
 }

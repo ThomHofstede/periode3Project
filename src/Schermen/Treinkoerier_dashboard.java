@@ -199,6 +199,11 @@ public class Treinkoerier_dashboard extends javax.swing.JFrame {
         });
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/Nieuwe bezorging.png"))); // NOI18N
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/dashboardLoguit.png"))); // NOI18N
 
@@ -268,13 +273,17 @@ public class Treinkoerier_dashboard extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void status_pakket_scherm_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_status_pakket_scherm_buttonActionPerformed
-        Status_pakket_scherm sps = new Status_pakket_scherm(this.gebruikersnaam);
+        StatusPakketScherm sps = new StatusPakketScherm(this.gebruikersnaam);
         this.setVisible(false);
     }//GEN-LAST:event_status_pakket_scherm_buttonActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         new SelecteerPakketStatus(this.gebruikersnaam).setVisible(true);
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        new ZoekPakket().setVisible(true);
+    }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
      * @param args the command line arguments
