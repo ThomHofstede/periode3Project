@@ -63,7 +63,7 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
               Date date = rs.getDate("deadline");
               
               if (date.after(currentdate)) {
-                  dtm1.addRow(new Object[] {"Pakket " + p});
+                  dtm1.addRow(new Object[] {p});
               } 
           }
         }
@@ -79,7 +79,6 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
     
     
     
-    StatusPakket jtRowData = new StatusPakket();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -226,15 +225,14 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
         int index = jTable3.getSelectedRow();
         TableModel model = jTable3.getModel();
-        String PakketID = model.getValueAt(index, 0).toString();
         
+        String tester =  model.getValueAt(index, 0).toString();
+        
+
+        StatusPakket jtRowData = new StatusPakket(tester, this.gebruikersnaam);
+
         jtRowData.setVisible(true);
-        jtRowData.pack();
         jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        jtRowData.jLabel_ID.setText(PakketID);
-        
-        jtRowData.jLabel_ID.setText(PakketID);
     }//GEN-LAST:event_jTable3MouseClicked
 
     /**
@@ -282,4 +280,5 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
     private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
     private String gebruikersnaam;
+    private int pakketID;
 }
