@@ -17,7 +17,8 @@ import org.json.simple.parser.ParseException;
 
 /**
  *
- * @author thomhofstede
+ * 
+ 
  * AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s <--- map directions API key
  */
 public class Request{

@@ -194,7 +194,7 @@ public class Inlogscherm extends javax.swing.JFrame {
                 this.setVisible(false);
             }
             if (fiets.controleerRol(this.jTextField1.getText())) {
-                new Status_pakket_scherm(this.jTextField1.getText());
+                new StatusPakketScherm(this.jTextField1.getText());
                 this.setVisible(false);
             }
         }

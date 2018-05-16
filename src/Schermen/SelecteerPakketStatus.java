@@ -13,7 +13,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -77,7 +79,7 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
     
     
     
-    
+    StatusPakket jtRowData = new StatusPakket();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -157,6 +159,11 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
             }
         });
         jTable3.setRowHeight(25);
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable3);
         if (jTable3.getColumnModel().getColumnCount() > 0) {
             jTable3.getColumnModel().getColumn(0).setResizable(false);
@@ -213,6 +220,22 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    
+    
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        int index = jTable3.getSelectedRow();
+        TableModel model = jTable3.getModel();
+        String PakketID = model.getValueAt(index, 0).toString();
+        
+        jtRowData.setVisible(true);
+        jtRowData.pack();
+        jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        jtRowData.jLabel_ID.setText(PakketID);
+        
+        jtRowData.jLabel_ID.setText(PakketID);
+    }//GEN-LAST:event_jTable3MouseClicked
 
     /**
      * @param args the command line arguments

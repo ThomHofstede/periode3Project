@@ -9,13 +9,13 @@ import javax.swing.*;
  *
  * @author Olink
  */
-public class Status_pakket_scherm extends javax.swing.JFrame {
+public class StatusPakketScherm extends javax.swing.JFrame {
     private String gebruikersnaam;
 
     /**
      * Creates new form Status_pakket_scherm
      */
-    public Status_pakket_scherm(String gebruikersnaam) {
+    public StatusPakketScherm(String gebruikersnaam) {
         initComponents();
         
         this.gebruikersnaam = gebruikersnaam;
@@ -64,7 +64,6 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
         jwijzigingopgeslagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(1400, 800));
 
         jpakketid.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jpakketid.setText("jpakketid");
@@ -218,14 +217,15 @@ public class Status_pakket_scherm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Status_pakket_scherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StatusPakketScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Status_pakket_scherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StatusPakketScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Status_pakket_scherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StatusPakketScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Status_pakket_scherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(StatusPakketScherm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
