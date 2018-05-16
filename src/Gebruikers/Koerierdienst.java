@@ -12,17 +12,12 @@ import java.sql.Statement;
  */
 public class Koerierdienst extends Gebruiker {
     private String gebruikersnaam;
-    private String wachtwoord;
-    private String bedrijfnaam;
     private String koerierstatus;
-    private int telefoonnr;
 
-    public Koerierdienst(String gebruikersnaam, String wachtwoord) {
-        super(gebruikersnaam, wachtwoord);
-        
-        this.gebruikersnaam = gebruikersnaam;
-        this.wachtwoord = wachtwoord;
-        
+    public Koerierdienst() {
+    }
+    
+    public boolean controleerRol(String gebruikersnaam) {
         MysqlConnect dbconn = new MysqlConnect();
         
         try {
@@ -41,14 +36,12 @@ public class Koerierdienst extends Gebruiker {
           
           while (rs.next()) {
               String g = rs.getString("gebruikersnaam");
-              String bn = rs.getString("bedrijfnaam");
               String k = rs.getString("koerierstatus");
-              int telnr = rs.getInt("telefoonnr");
               
               if (g.equals(gebruikersnaam)) {
-                  this.bedrijfnaam = bn;
                   this.koerierstatus = k;
-                  this.telefoonnr = telnr;
+                  this.gebruikersnaam = gebruikersnaam;
+                  return true;
               }
           }
           
@@ -57,10 +50,7 @@ public class Koerierdienst extends Gebruiker {
         catch (Exception e) {
         System.err.println(e.getMessage());
     }  
-    }
-    
-    public String getBedrijfnaam() {
-        return this.bedrijfnaam;
+        return false;
     }
     
     public String getKoerierstatus() {
@@ -71,8 +61,5 @@ public class Koerierdienst extends Gebruiker {
         this.koerierstatus = koerierstatus;
     }
     
-    public int getTelefoonnr() {
-        return this.telefoonnr;
-    }
     
 }

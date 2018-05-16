@@ -13,17 +13,11 @@ import java.sql.Statement;
  */
 public class Treinkoerier extends Gebruiker {
     private String gebruikersnaam;
-    private String wachtwoord;
     private String voornaam;
     private String achternaam;
     private int telefoonnr;
-
-    public Treinkoerier(String gebruikersnaam, String wachtwoord) {
-        super(gebruikersnaam, wachtwoord);
-        
-        this.gebruikersnaam = gebruikersnaam;
-        this.wachtwoord = wachtwoord;
-        
+    
+    public boolean controleerRol(String gebruikersnaam) {
         MysqlConnect dbconn = new MysqlConnect();
         
         try {
@@ -50,6 +44,7 @@ public class Treinkoerier extends Gebruiker {
                   this.voornaam = v;
                   this.achternaam = a;
                   this.telefoonnr = telnr;
+                  return true;
               }
           }
           
@@ -58,7 +53,8 @@ public class Treinkoerier extends Gebruiker {
         catch (Exception e) {
         System.err.println(e.getMessage());
     }  
-  }
+        return false;
+    }
     
     public String getVoornaam() {
         return this.voornaam;

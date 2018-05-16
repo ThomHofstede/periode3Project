@@ -10,9 +10,9 @@ import java.util.Properties;
 public class MysqlConnect {
     // init database constants
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/test?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/KBS?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
+    private static final String USERNAME = "root"; // 
+    private static final String PASSWORD = "1234";
     private static final String MAX_POOL = "250";
 
     // init connection object
@@ -21,7 +21,7 @@ public class MysqlConnect {
     private Properties properties;
 
     // create properties
-    private Properties getProperties() {
+    private Properties getProperties() { 
         if (properties == null) {
             properties = new Properties();
             properties.setProperty("user", USERNAME);
@@ -32,7 +32,7 @@ public class MysqlConnect {
     }
 
     // connect database
-    public Connection connect() {
+    public Connection connect() { 
         if (connection == null) {
             try {
                 Class.forName(DATABASE_DRIVER);
