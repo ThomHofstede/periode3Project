@@ -265,7 +265,7 @@ public class Treinkoerier_dashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel4MouseClicked
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        new ZoekPakket().setVisible(true);
+        new ZoekPakket(this.gebruikersnaam).setVisible(true);
     }//GEN-LAST:event_jLabel5MouseClicked
 
     /**
