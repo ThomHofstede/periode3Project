@@ -6,16 +6,14 @@
 package Schermen;
 
 import Database.MysqlConnect;
-import java.awt.Color;
-import static java.lang.reflect.Array.set;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.DefaultListModel;
 import javax.swing.RowSorter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -27,23 +25,23 @@ import javax.swing.SortOrder;
  *
  * @author Olink
  */
-public class Pakketlijst_dashboard extends javax.swing.JFrame {
-    private String gebruikersnaam;
+public class PakketlijstDashboard extends javax.swing.JFrame {
+    private final String gebruikersnaam;
     /**
      * Creates new form Pakketlijstscherm
+     * @param gebruikersnaam
      */
-    public Pakketlijst_dashboard(String gebruikersnaam) {
+    public PakketlijstDashboard(String gebruikersnaam) {
         initComponents();
         
         this.gebruikersnaam = gebruikersnaam;
         this.pakketArray();
-        
         this.setVisible(true);
     }
     
     public void pakketArray() {
         DefaultTableModel dtm1 = (DefaultTableModel)jTable1.getModel();
-        TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(this.jTable1.getModel());
+        TableRowSorter<TableModel> sorter = new TableRowSorter<>(this.jTable1.getModel());
         this.jTable1.setRowSorter(sorter);
         
         List<RowSorter.SortKey> sortKeys = new ArrayList<>(25);
@@ -54,48 +52,45 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
         MysqlConnect dbconn = new MysqlConnect();
         
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDateTime now = LocalDateTime.now();
             Date currentdate = new Date(dtf.format(now));
-        // create our mysql database connection
-          Connection conn = dbconn.connect();
+            // create our mysql database connection
+            Connection conn = dbconn.connect();
 
-          // our SQL SELECT query. 
-          // if you only need a few columns, specify them by name instead of using "*"
-          String query = "SELECT * FROM Pakketlevering AS pl INNER JOIN Pakket AS p ON pl.pakketID=p.pakketID JOIN Treinkoerier AS T ON pl.treinkoerier=T.gebruikersnaam";
+            // our SQL SELECT query. 
+            // if you only need a few columns, specify them by name instead of using "*"
+            String query = "SELECT * FROM Pakketlevering AS pl INNER JOIN Pakket AS p ON pl.pakketID=p.pakketID JOIN Treinkoerier AS T ON pl.treinkoerier=T.gebruikersnaam";
 
-          // create the java statement
-          Statement st = conn.createStatement();
+            // create the java statement
+            Statement st = conn.createStatement();
 
-          // execute the query, and get a java resultset
-          ResultSet rs = st.executeQuery(query);
-          
-          while (rs.next()) {
-              
-              int pi = rs.getInt("pakketID");
-              String trein = rs.getString("treinkoerier");
-              String fiets = rs.getString("fietskoerier");
-              String d = rs.getString("deadline");
-              
-              Date date = rs.getDate("deadline");
-              
-              int o = rs.getInt("oplevering");
-              String vs = rs.getString("vertrekstation");
-              String as = rs.getString("aankomststation");
-              String ps = rs.getString("pakketstatus");
-              String sb = rs.getString("status_beschrijving");
-              int t = rs.getInt("telefoonnr");
-              
-              if (date.before(currentdate)) {
-                  dtm1.addRow(new Object[] {pi, trein, t, fiets, "over deadline!", o + " euro", vs, as, ps, sb});
-              } else {
-                  dtm1.addRow(new Object[] {pi, trein, t, fiets, d, o + " euro", vs, as, ps, sb});
-              }
-          }
+            // execute the query, and get a java resultset
+            ResultSet rs = st.executeQuery(query);
+
+            while (rs.next()) {
+                int pi = rs.getInt("pakketID");
+                String trein = rs.getString("treinkoerier");
+                String fiets = rs.getString("fietskoerier");
+                String d = rs.getString("deadline");
+
+                Date date = rs.getDate("deadline");
+
+                int o = rs.getInt("oplevering");
+                String vs = rs.getString("vertrekstation");
+                String as = rs.getString("aankomststation");
+                String ps = rs.getString("pakketstatus");
+                String sb = rs.getString("incident_beschrijving");
+                int t = rs.getInt("telefoonnr");
+
+                dtm1.addRow(new Object[] {pi, trein, t, fiets, d, o + " euro", vs, as, ps, sb});
+            }
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        
+        
     }
 
     /**
@@ -113,6 +108,7 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -138,18 +134,40 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Pakket ID", "Treinkoerier", "telefoonnr", "Fietskoerier", "Deadline", "Oplevering", "Vertrekstation", "Aankomststation", "Pakketstatus", "Status_beschrijving"
+                "Pakket ID", "Treinkoerier", "telefoonnr", "Fietskoerier", "Deadline", "Oplevering", "Vertrekstation", "Aankomststation", "Pakketstatus", "Incident - beschrijving"
             }
         ) {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane4.setViewportView(jTable1);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/AanmeldenPakket.jpeg"))); // NOI18N
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jLabel7MouseEntered(evt);
+            }
+        });
+        jLabel7.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jLabel7KeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -160,14 +178,15 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane4))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(621, 621, 621)
-                        .addComponent(jLabel6))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(568, 568, 568)
-                        .addComponent(jLabel4)))
+                .addGap(568, 568, 568)
+                .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,9 +195,11 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addGap(54, 54, 54)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addGap(49, 49, 49)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -205,6 +226,20 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel6MouseEntered
 
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        this.setVisible(false);
+        new AanmakenPakket(this.gebruikersnaam).setVisible(true);
+        
+    }//GEN-LAST:event_jLabel7MouseClicked
+
+    private void jLabel7MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel7MouseEntered
+
+    private void jLabel7KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jLabel7KeyPressed
+        
+    }//GEN-LAST:event_jLabel7KeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -222,14 +257,18 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijst_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PakketlijstDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijst_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PakketlijstDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijst_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PakketlijstDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Pakketlijst_dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PakketlijstDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -246,6 +285,7 @@ public class Pakketlijst_dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;

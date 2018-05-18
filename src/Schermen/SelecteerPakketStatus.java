@@ -8,6 +8,7 @@ package Schermen;
 import Database.MysqlConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -44,13 +45,13 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
         try {     
         // create our mysql database connection
           Connection conn = dbconn.connect();
-          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime now = LocalDateTime.now();
-            Date currentdate = new Date(dtf.format(now));
+          DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+          LocalDateTime now = LocalDateTime.now();
+          Date currentdate = new Date(dtf.format(now));
 
           // our SQL SELECT query. 
           // if you only need a few columns, specify them by name instead of using "*"
-          String query = "SELECT * FROM Pakketlevering WHERE treinkoerier=" + "'" + this.gebruikersnaam + "'";
+          String query = "SELECT * FROM Pakketlevering p INNER JOIN pakket pa ON p.pakketid = pa.pakketid WHERE treinkoerier=" + "'" + this.gebruikersnaam + "'";
 
           // create the java statement
           Statement st = conn.createStatement();
@@ -67,7 +68,7 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
               } 
           }
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         
@@ -229,7 +230,7 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
         String tester =  model.getValueAt(index, 0).toString();
         
 
-        StatusPakket jtRowData = new StatusPakket(tester, this.gebruikersnaam);
+        StatusPakket jtRowData = new StatusPakket();
 
         jtRowData.setVisible(true);
         jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

@@ -190,7 +190,7 @@ public class Inlogscherm extends javax.swing.JFrame {
                 this.setVisible(false);
             }
             if (kd.controleerRol(this.jTextField1.getText())) {
-                new Pakketlijst_dashboard(this.jTextField1.getText());
+                new PakketlijstDashboard(this.jTextField1.getText());
                 this.setVisible(false);
             }
             if (fiets.controleerRol(this.jTextField1.getText())) {

@@ -5,7 +5,7 @@
  */
 package Schermen;
 
-import API_directions.Direction;
+import API.Direction;
 
 /**
  *

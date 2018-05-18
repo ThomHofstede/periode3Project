@@ -6,6 +6,7 @@
 package API;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 
@@ -17,22 +18,26 @@ import java.util.ArrayList;
 public class RequestTest {
     public static void main(String[] args){
         
-        ArrayList<String> origins = new ArrayList<String>();
-        ArrayList<String> destinations = new ArrayList<String>();
-
-        origins.add("zwolle");
-        origins.add("raalte");
-        
-        destinations.add("amsterdam");
-        destinations.add("enschede");
-        
-        DistanceMatrix req1 = new DistanceMatrix(origins, destinations, "transit", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");
-            
-        
-
-//        Direction req1 = new Direction("zwolle", "deventer", "transit", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");
+//        ArrayList<String> origins = new ArrayList<String>();
+//        ArrayList<String> destinations = new ArrayList<String>();
+//
+//        origins.add("zwolle");
+//        origins.add("raalte");
+//        
+//        destinations.add("amsterdam");
+//        destinations.add("enschede");
+//        
+//        DistanceMatrix req1 = new DistanceMatrix(origins, destinations, "transit", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");
 //            
-//        System.out.println(req1.getTravelDuration());                    
+        
+
+       // Direction req1 = new Direction("zwolle", "deventer", "transit", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");
+//            
+       // System.out.println(req1.getTravelDuration());
+       
+       Random generator = new Random(); 
+        int i = generator.nextInt(100000);
+        System.out.println(i);
     }
     
 }

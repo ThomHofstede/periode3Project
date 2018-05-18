@@ -18,7 +18,7 @@ public class Direction{
     private final String destination;
     private final String mode;
     private final String APIKey;
-    private final double minDistanceInMeters = 25000.5;
+    private final double minDistanceInMeters = 54500;
     private Request req;
     private JSONObject result;
         
@@ -27,6 +27,8 @@ public class Direction{
         this.destination = destination;
         this.mode = mode;
         this.APIKey = APIKey;
+        
+        System.out.println("https://maps.googleapis.com/maps/api/directions/json?origin="+origin+"&destination="+destination+"&mode=" + mode +"&key=" + APIKey);
     }
     
     private String generateURL(){
