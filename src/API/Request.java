@@ -26,7 +26,7 @@ public class Request{
     private String url;
     private JSONObject result = new JSONObject();
 
-    private ColorInConsole cic = new ColorInConsole();
+    private final ColorInConsole cic = new ColorInConsole();
 
     public Request(String url){
         if(!url.isEmpty()){
@@ -70,10 +70,6 @@ public class Request{
     }
     
     public boolean hasJSONResult(){
-        if(this.result != null){
-            return true;
-        }else{
-            return false;
-        }
+        return this.result != null;
     }
 }

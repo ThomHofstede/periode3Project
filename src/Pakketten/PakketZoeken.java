@@ -9,9 +9,7 @@ package Pakketten;
  *
  * @author tomde
  */
-import Database.MysqlConnect;
 import java.sql.*;
-import java.util.Scanner;
   
         
 public class PakketZoeken {
@@ -44,7 +42,7 @@ public class PakketZoeken {
                 System.out.println(rs.getString(datum));
             }
             
-        }catch(Exception exc) {
+        }catch(SQLException exc) {
             System.out.println("Fout: " + exc.getMessage());
         }
     }

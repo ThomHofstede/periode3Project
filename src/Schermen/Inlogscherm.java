@@ -7,18 +7,8 @@ package Schermen;
 
 import Gebruikers.Treinkoerier;
 import Gebruikers.Koerierdienst;
-import java.awt.Label;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import javax.swing.JFrame;
-import Database.MysqlConnect;
 import Gebruikers.*;
-import java.awt.Desktop.Action;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import javax.swing.AbstractAction;
 
 /**
  *
@@ -254,6 +244,7 @@ public class Inlogscherm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Inlogscherm().setVisible(true);
             }

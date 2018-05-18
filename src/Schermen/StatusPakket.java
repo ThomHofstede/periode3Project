@@ -12,9 +12,12 @@ import Pakketten.Pakketlevering;
  * @author Jeffrey
  */
 public class StatusPakket extends javax.swing.JFrame {
-
+    private final String gebruikersnaam;
+    private final String pakketID;
     /**
      * Creates new form StatusPakket
+     * @param pakket
+     * @param gebruikersnaam
      */
     public StatusPakket(String pakket, String gebruikersnaam) {
         initComponents();
@@ -238,8 +241,7 @@ public class StatusPakket extends javax.swing.JFrame {
     private javax.swing.JButton jVerzenden;
     private javax.swing.JLabel jWijziging;
     // End of variables declaration//GEN-END:variables
-    private String gebruikersnaam;
-    private String pakketID;
+    
     
 
 

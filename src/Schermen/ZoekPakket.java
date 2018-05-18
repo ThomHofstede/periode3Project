@@ -10,6 +10,7 @@ import API.Direction;
 import Database.MysqlConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,7 +25,7 @@ import java.util.Date;
 public class ZoekPakket extends javax.swing.JFrame {
     
     
-    private String gebruikersnaam;
+    private final String gebruikersnaam;
     /**
      * Creates new form ZoekPakket
      * @param gebruikersnaam
@@ -485,7 +486,7 @@ public class ZoekPakket extends javax.swing.JFrame {
             
         }
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             System.err.println(e.getMessage());
             
             

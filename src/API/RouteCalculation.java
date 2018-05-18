@@ -37,7 +37,6 @@ public final class RouteCalculation {
         // api call 3
         Direction afterStation = new Direction(to.get(0) + "%20station", "bicycling", to.get(1) + "%20" + to.get(2) + "%20" + to.get(0), "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
         
-        Boolean isRendabel;
         this.totalDistance = (preStation.getTravelDistance() / 1000) + (afterStation.getTravelDistance() / 1000);
         if(this.totalDistance > 54.5){
             this.usingTrainTransport = true;

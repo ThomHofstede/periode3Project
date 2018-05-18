@@ -9,17 +9,13 @@ import API.RouteCalculation;
 import Database.MysqlConnect;
 import java.awt.Color;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
 
 /**
  *
@@ -71,19 +67,19 @@ public class AanmakenPakket extends javax.swing.JFrame {
             
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
             LocalDate deadline = LocalDate.now().plusDays(2);
-            // create our mysql database connection
-            Connection conn = dbconnection.connect();
             // pakket record
-            String query = "INSERT INTO pakket VALUES ("+orderID+", \"aangemaakt\", NULL, \" "+from.get(0)+"\", \""+to.get(2)+"\", \""+from.get(1) + "\"  \"" + from.get(2) + "\"  \"" +  from.get(0)+"\", \""+to.get(0) + "\"  \"" + to.get(1) + "\"  \"" +  to.get(2)+"\", \""+deadline+"\", 0,0,"+this.isGreen+")";
-            Statement st = conn.createStatement();
-            int rs = st.executeUpdate(query);
-            
-            //pakket levering record
-            String query2 = "INSERT INTO pakketlevering VALUES ("+orderID+", NULL, \"test\", \"3.50\" )";
-            Statement st2 = conn.createStatement();
-            int rs2 = st.executeUpdate(query2);
-            
-            conn.close();
+            try ( // create our mysql database connection
+                    Connection conn = dbconnection.connect()) {
+                // pakket record
+                String query = "INSERT INTO pakket VALUES ("+orderID+", \"aangemaakt\", NULL, \" "+from.get(0)+"\", \""+to.get(2)+"\", \""+from.get(1) + "\"  \"" + from.get(2) + "\"  \"" +  from.get(0)+"\", \""+to.get(0) + "\"  \"" + to.get(1) + "\"  \"" +  to.get(2)+"\", \""+deadline+"\", 0,0,"+this.isGreen+")";
+                Statement st = conn.createStatement();
+                int rs = st.executeUpdate(query);
+                
+                //pakket levering record
+                String query2 = "INSERT INTO pakketlevering VALUES ("+orderID+", NULL, \"test\", \"3.50\" )";
+                Statement st2 = conn.createStatement();
+                int rs2 = st.executeUpdate(query2);
+            }
             orderID = 0;
             
             //switch to other screen

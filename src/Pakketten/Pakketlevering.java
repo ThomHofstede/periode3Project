@@ -4,6 +4,7 @@ package Pakketten;
 import Database.MysqlConnect;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
@@ -57,7 +58,7 @@ public class Pakketlevering {
           }
           
         }
-        catch (Exception e) {
+        catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -87,7 +88,7 @@ public class Pakketlevering {
           }
           
         }
-          catch (Exception e) {
+          catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
@@ -115,30 +116,21 @@ public class Pakketlevering {
           }
           
         }
-          catch (Exception e) {
+          catch (SQLException e) {
             System.err.println(e.getMessage());
         }
     }
     
     public boolean getOpgehaald() {
-        if (this.pakketstatus.equals("opgehaald (trein") || this.pakketstatus.equals("opgehaald (fiets)")) {
-            return true;
-        }
-        return false;
+        return this.pakketstatus.equals("opgehaald (trein") || this.pakketstatus.equals("opgehaald (fiets)");
     }
     
     public boolean getAfgeleverd() {
-        if (this.pakketstatus.equals("afgeleverd (trein)") || this.pakketstatus.equals("afgeleverd (fiets)")) {
-            return true;
-        }
-        return false;
+        return this.pakketstatus.equals("afgeleverd (trein)") || this.pakketstatus.equals("afgeleverd (fiets)");
     }
     
     public boolean getIncident() {
-        if (this.pakketstatus.equals("incident (trein)") || this.pakketstatus.equals("incident (fiets)")) {
-            return true;
-        }
-        return false;
+        return this.pakketstatus.equals("incident (trein)") || this.pakketstatus.equals("incident (fiets)");
     }  
     
     public int getPakketId() {

@@ -38,7 +38,7 @@ public class MysqlConnect {
                 Class.forName(DATABASE_DRIVER);
                 connection = DriverManager.getConnection(DATABASE_URL, getProperties());
             } catch (ClassNotFoundException | SQLException e) {
-                e.printStackTrace();
+                System.out.println("Exception: " + e);
             }
         }
         return connection;
@@ -51,7 +51,7 @@ public class MysqlConnect {
                 connection.close();
                 connection = null;
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println("Exception: " + e);
             }
         }
     }
@@ -66,16 +66,14 @@ public class MysqlConnect {
               // Create the query
               String query = "SELECT * FROM " + table;
 
-              // Create the statement
-              Statement st = conn.createStatement();
-
-              // Get the data
-              ResultSet rs = st.executeQuery(query);
-              
-              tableResults = rs;
-              
-              // Close connection
-              st.close();
+                // Get the data
+                try ( // Create the statement
+                        Statement st = conn.createStatement()) {
+                    // Get the data
+                    ResultSet rs = st.executeQuery(query);
+                    tableResults = rs;
+                    // Close connection
+                }
             }catch (SQLException e){
               System.err.println("Got an exception! ");
               System.err.println(e.getMessage());
