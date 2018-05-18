@@ -6,20 +6,22 @@
 package API;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import plugins.ColorInConsole;
 
 /**
  *
  * @author thomhofstede
  */
-public class RouteCalculation {
-    private ArrayList<String> from;
-    private ArrayList<String> to;
-    private boolean status = false;
-    private ArrayList<String> data = new ArrayList<>();
+
+public final class RouteCalculation {
+    private final ArrayList<String> from;
+    private final ArrayList<String> to;
+    private final boolean status = false;
+    private final ArrayList<String> data = new ArrayList<>();
     public ColorInConsole cic;
     private double totalPrice = 0.0;
+    private Boolean usingTrainTransport = false;
+    private long totalDistance = 0;
 
     public RouteCalculation(ArrayList<String> from, ArrayList<String> to){
         this.from = from;
@@ -31,39 +33,44 @@ public class RouteCalculation {
     public void doCalls(){
         // Heenweg fietskoerier
         Direction preStation = new Direction(from.get(1) + "%20" + from.get(2) + "%20" + from.get(0), from.get(0) + "%20station", "bicycling", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
-        long distanceInKM = preStation.getTravelDistance() / 1000;
-        
-        if(distanceInKM < 25 ){
-            totalPrice += 10;
-        }else if(distanceInKM> 25 && distanceInKM < 40){
-            totalPrice += 12.50;
-        }else{
-            long difference = distanceInKM - 40;
-            totalPrice+= 12.50 + (difference * 0.40);
-        }
-        
-        // Trein koerier (vast bedrag)
-        totalPrice += 3.50;
         
         // api call 3
         Direction afterStation = new Direction(to.get(0) + "%20station", "bicycling", to.get(1) + "%20" + to.get(2) + "%20" + to.get(0), "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
-        long distanceInKM2 = afterStation.getTravelDistance() / 1000;
         
-        if(distanceInKM2 < 25 ){
-            totalPrice += 10;
-        }else if(distanceInKM2> 25 && distanceInKM2 < 40){
-            totalPrice += 12.50;
-        }else{
-            long difference2 = distanceInKM2 - 40;
-            totalPrice+= 12.50 + (difference2 * 0.40);
+        Boolean isRendabel;
+        this.totalDistance = (preStation.getTravelDistance() / 1000) + (afterStation.getTravelDistance() / 1000);
+        if(this.totalDistance > 54.5){
+            this.usingTrainTransport = true;
+            totalPrice += this.calculatePrice(preStation.getTravelDistance() / 1000) + 3.50 + this.calculatePrice(afterStation.getTravelDistance() / 1000);
         }
-        // set status true if all is correct
+    }
+    
+    public double calculatePrice(double dik){
+        double price = 0;
+        if(this.usingTrainTransport){
+            price = (10+((dik - 25) * 0.39));
+        }else{
+            if(dik < 4){
+                price = 9;
+            }else if(dik > 4 && dik < 25){
+                price = 10;
+            }else if(dik > 25 && dik < 31){
+                price = (10+((dik - 25) * 0.39));
+            }else if(dik > 31 && dik < 40){
+                price = 12.50;
+            }else if(dik > 40 && dik < 54.5){
+                price = (10+((dik - 25) * 0.39));
+            }
+        }
         
-        System.out.println(totalPrice);
-        
+        return price;
     }
     
     public double getPrice(){
         return this.totalPrice;
+    }
+    
+    public Boolean isUsingTrains(){
+        return this.usingTrainTransport;
     }
 }

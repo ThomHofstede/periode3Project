@@ -16,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -28,6 +27,7 @@ public class ZoekPakket extends javax.swing.JFrame {
     private String gebruikersnaam;
     /**
      * Creates new form ZoekPakket
+     * @param gebruikersnaam
      */
     public ZoekPakket(String gebruikersnaam) {
         initComponents();
@@ -430,13 +430,6 @@ public class ZoekPakket extends javax.swing.JFrame {
         Date aDate = jXDatePicker2.getDate();        
         DateFormat aDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String TotDatum = aDateFormat.format(aDate); 
-        
-        if(!this.beginS.isEmpty() && !this.eindS.isEmpty()){
-            Direction req1 = new Direction(this.beginS, this.eindS, "transit", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");
-            
-            System.out.println(req1.getTravelDuration()/60); 
-            System.out.println(req1.getTravelDistance()/1000);
-        }
         
         MysqlConnect dbconn = new MysqlConnect();
      
