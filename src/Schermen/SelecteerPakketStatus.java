@@ -230,10 +230,10 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
         String tester =  model.getValueAt(index, 0).toString();
         
 
-        StatusPakket jtRowData = new StatusPakket();
+        //StatusPakket jtRowData = new StatusPakket();
 
-        jtRowData.setVisible(true);
-        jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+//        jtRowData.setVisible(true);
+//        jtRowData.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_jTable3MouseClicked
 
     /**

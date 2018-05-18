@@ -14,6 +14,11 @@ import java.sql.Statement;
 import javax.swing.JFrame;
 import Database.MysqlConnect;
 import Gebruikers.*;
+import java.awt.Desktop.Action;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
 
 /**
  *
@@ -30,6 +35,8 @@ public class Inlogscherm extends javax.swing.JFrame {
         initComponents();
         
         this.FoutMelding.setVisible(false);
+        
+        
     }
 
     /**
@@ -79,6 +86,11 @@ public class Inlogscherm extends javax.swing.JFrame {
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);
+            }
+        });
+        jPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jPasswordField1KeyPressed(evt);
             }
         });
 
@@ -176,6 +188,16 @@ public class Inlogscherm extends javax.swing.JFrame {
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
         //Gebruikers worden aangemaakt om te controleren welke rol bij de gebruikersnaam past
+       this.continueLogin();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void jPasswordField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPasswordField1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER) {
+            this.continueLogin();
+        }
+    }//GEN-LAST:event_jPasswordField1KeyPressed
+ 
+    public void continueLogin(){
         Gebruiker g = new Gebruiker();
         Treinkoerier tk = new Treinkoerier();
         Koerierdienst kd = new Koerierdienst();
@@ -202,8 +224,7 @@ public class Inlogscherm extends javax.swing.JFrame {
             //Foutmelding weergeven als wachtwoord en gebruikersnaam niet overeenkomen
             this.FoutMelding.setVisible(true);
         }
-    }//GEN-LAST:event_jLabel4MouseClicked
-
+    }
     /**
      * @param args the command line arguments
      */
