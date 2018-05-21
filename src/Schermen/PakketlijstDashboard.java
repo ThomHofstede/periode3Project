@@ -22,7 +22,7 @@ import javax.swing.SortOrder;
 
 /**
  *
- * @author Olink
+ * @author Olink 
  */
 public final class PakketlijstDashboard extends javax.swing.JFrame {
     private final String gebruikersnaam;
@@ -46,7 +46,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         this.jPanel3.setVisible(false);
 
         this.jLabel30.setForeground(Color.white);
-        this.jLabel25.setVisible(false);
+        this.jLabel36.setForeground(Color.white);
     }
 
     private void fillSecondPanel(){
@@ -58,7 +58,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         this.jLabel23.setText("Station " + to.get(0)); // eind station 
         
         this.jLabel12.setText("€" + price); // set price
-        this.jLabel15.setText("€ 20");
+        this.jLabel31.setText("€ 20");
     }
     
     public void fillTable(){
@@ -83,13 +83,13 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                     
                     Date date = rs.getDate("deadline");
                     
-                    int o = rs.getInt("oplevering");
+                    double o = rs.getInt("kosten");
                     String vs = rs.getString("vertrekstation");
                     String as = rs.getString("aankomststation");
                     String ps = rs.getString("pakketstatus");
                     String sb = rs.getString("incident_beschrijving");
                     
-                    dtm1.addRow(new Object[] {pi, trein, fiets, d, o + " euro", vs, as, ps, sb});
+                    dtm1.addRow(new Object[] {pi, "€" + o, trein, fiets, d, vs, as, ps, sb});
                 }
             } catch (SQLException ex) {
                 System.out.println("Error while filling table: " + ex);
@@ -108,6 +108,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPasswordField1 = new javax.swing.JPasswordField();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -156,12 +157,14 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
         jLabel30 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
 
+        jPasswordField1.setText("jPasswordField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1400, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1400, 800));
 
@@ -188,7 +191,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Pakket ID", "Treinkoerier", "Fietskoerier", "Deadline", "Oplevering", "Vertrekstation", "Aankomststation", "Pakketstatus", "Incident - beschrijving"
+                "Pakket ID", "Bezorgkosten", "Treinkoerier", "Fietskoerier", "Deadline", "Vertrekstation", "Aankomststation", "Pakketstatus", "Incident - beschrijving"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -246,7 +249,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -477,7 +480,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel10)
                         .addGap(218, 218, 218)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,7 +505,10 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel3.setRequestFocusEnabled(false);
+        jPanel3.setAlignmentX(0.0F);
+        jPanel3.setAlignmentY(0.0F);
+        jPanel3.setMinimumSize(new java.awt.Dimension(1400, 800));
+        jPanel3.setPreferredSize(new java.awt.Dimension(1400, 800));
 
         jLabel1.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 48)); // NOI18N
         jLabel1.setText("Aanmelden pakket");
@@ -559,8 +565,6 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         jLabel30.setForeground(new java.awt.Color(255, 0, 0));
         jLabel30.setText("Vul alle velden in om verder te gaan!");
 
-        jLabel29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/skyline.png"))); // NOI18N
-
         jLabel33.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Schermen/Afbeeldingen/terugincident.png"))); // NOI18N
         jLabel33.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -583,10 +587,8 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel29)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(1405, 1405, 1405)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(414, 414, 414)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -622,17 +624,15 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                             .addGap(45, 45, 45)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel9)
-                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(75, 75, 75))
+                .addGap(5, 5, 5))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
@@ -651,7 +651,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -670,9 +670,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel33)
                         .addComponent(jLabel30, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70))
+                .addGap(368, 368, 368))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -683,8 +681,8 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 1400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -693,12 +691,12 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(23, Short.MAX_VALUE)))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(29, 29, 29)
@@ -733,13 +731,41 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jLabel7KeyPressed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
 
-    private void jLabel33MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseEntered
-    
-    }//GEN-LAST:event_jLabel33MouseEntered
+    }//GEN-LAST:event_jPanel4MouseClicked
+
+    private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
+        this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.black, 5));
+        this.jPanel5.setBorder(BorderFactory.createLineBorder(Color.white, 0));
+        this.isGreen = true;
+        Pakket.setIsGreen(true);
+    }//GEN-LAST:event_jPanel4MousePressed
+
+    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+        this.jPanel5.setBorder(BorderFactory.createLineBorder(Color.black, 5));
+        this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.white, 0));
+        this.isGreen = false;
+        Pakket.setIsGreen(false);
+    }//GEN-LAST:event_jPanel5MousePressed
+
+    private void jLabel37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseClicked
+        this.jPanel3.setVisible(false);
+        this.jPanel2.setVisible(true);
+    }//GEN-LAST:event_jLabel37MouseClicked
+
+    private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
+        if(Pakket.getGreen() != null){
+            this.jLabel36.setVisible(false);
+            if(Pakket.create(this.from, this.to, this.price)){
+                //switch to other screen
+                this.setVisible(false);
+                new PakketlijstDashboard(this.gebruikersnaam).setVisible(true);
+            }
+        }else{
+            this.jLabel36.setForeground(Color.red); //error label
+        }
+    }//GEN-LAST:event_jLabel38MouseClicked
 
     private void jLabel34MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel34MouseClicked
         if(!this.jTextField4.getText().isEmpty() &&
@@ -763,9 +789,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
             to.add(this.jTextField6.getText());
             to.add(this.jTextField8.getText());
 
-            System.out.println("-------- 1");
-
-            RouteCalculation rc = new RouteCalculation(from, to);
+            RouteCalculation rc = new RouteCalculation(from, to, this.isGreen);
             if(rc.getPrice() > 0){
                 this.jPanel3.setVisible(false);
                 this.jPanel2.setVisible(true);
@@ -778,44 +802,18 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel34MouseClicked
 
-    private void jPanel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MouseClicked
+    private void jLabel33MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseEntered
 
-    }//GEN-LAST:event_jPanel4MouseClicked
-
-    private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
-        this.jPanel3.setBorder(BorderFactory.createLineBorder(Color.black, 5));
-        this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.white, 0));
-        Pakket.setIsGreen(true);
-    }//GEN-LAST:event_jPanel4MousePressed
-
-    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
-        this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.black, 5));
-        this.jPanel3.setBorder(BorderFactory.createLineBorder(Color.white, 0));
-        Pakket.setIsGreen(false);
-    }//GEN-LAST:event_jPanel5MousePressed
-
-    private void jLabel37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseClicked
-        this.jPanel3.setVisible(false);
-        this.jPanel2.setVisible(true);
-    }//GEN-LAST:event_jLabel37MouseClicked
-
-    private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
-        if(this.isGreen != null){
-            this.jLabel25.setVisible(false);
-            if(Pakket.create(this.from, this.to)){
-                //switch to other screen
-                this.setVisible(false);
-                new PakketlijstDashboard(this.gebruikersnaam).setVisible(true);
-            }
-        }else{
-            this.jLabel25.setVisible(true); //error label
-        }
-    }//GEN-LAST:event_jLabel38MouseClicked
+    }//GEN-LAST:event_jLabel33MouseEntered
 
     private void jLabel33MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel33MouseClicked
         this.jPanel3.setVisible(false);
         this.jPanel1.setVisible(true);
     }//GEN-LAST:event_jLabel33MouseClicked
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -880,7 +878,6 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -902,6 +899,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;

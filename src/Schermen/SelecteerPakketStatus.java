@@ -51,7 +51,7 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
 
           // our SQL SELECT query. 
           // if you only need a few columns, specify them by name instead of using "*"
-          String query = "SELECT * FROM Pakketlevering p INNER JOIN pakket pa ON p.pakketid = pa.pakketid WHERE treinkoerier=" + "'" + this.gebruikersnaam + "'";
+          String query = "SELECT * FROM Pakketlevering p INNER JOIN pakket pa ON p.pakketid = pa.pakketid WHERE treinkoerier=" + "'" + this.gebruikersnaam + "' and active = 1";
 
           // create the java statement
           Statement st = conn.createStatement();
