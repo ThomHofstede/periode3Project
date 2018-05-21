@@ -101,6 +101,7 @@ public class ZoekPakket extends javax.swing.JFrame {
         jPasswordField1.setText("jPasswordField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1400, 800));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

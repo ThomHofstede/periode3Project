@@ -27,7 +27,7 @@ public class Pakket {
     private static double price;
     private static Boolean isGreen;
     
-    public static boolean create(ArrayList from, ArrayList to){
+    public static boolean create(ArrayList from, ArrayList to, double costs){
         MysqlConnect dbconnection = new MysqlConnect();
         dbconnection.connect();
         Random generator = new Random(); 
@@ -51,7 +51,7 @@ public class Pakket {
                 int rs = st.executeUpdate(query);
                 
                 //pakket levering record
-                String query2 = "INSERT INTO pakketlevering VALUES ("+orderID+", NULL, \"test\", \"3.50\" )";
+                String query2 = "INSERT INTO pakketlevering VALUES ("+orderID+", \"NULL\", \"test\", \"3.50\", "+costs+")";
                 Statement st2 = conn.createStatement();
                 int rs2 = st.executeUpdate(query2);
             }
@@ -69,6 +69,10 @@ public class Pakket {
     
     public static void setIsGreen(Boolean value){
         isGreen = value;
+    }
+    
+    public static Boolean getGreen(){
+        return isGreen;
     }
     
     public static ResultSet getAll(){

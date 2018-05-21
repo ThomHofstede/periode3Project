@@ -12,12 +12,9 @@ import Pakketten.Pakketlevering;
  * @author Jeffrey
  */
 public class StatusPakket extends javax.swing.JFrame {
-    private final String gebruikersnaam;
-    private final String pakketID;
+
     /**
      * Creates new form StatusPakket
-     * @param pakket
-     * @param gebruikersnaam
      */
     public StatusPakket(String pakket, String gebruikersnaam) {
         initComponents();
@@ -47,10 +44,19 @@ public class StatusPakket extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel_ID = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel_Koerier = new javax.swing.JLabel();
+        jOpgehaald = new javax.swing.JRadioButton();
+        jAfgevelerd = new javax.swing.JRadioButton();
+        jIncident = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jIncidentBeschrijving = new javax.swing.JTextArea();
+        jVerzenden = new javax.swing.JButton();
+        jTerug = new javax.swing.JButton();
+        jWijziging = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +71,37 @@ public class StatusPakket extends javax.swing.JFrame {
         jLabel_Koerier.setFont(new java.awt.Font("Yu Gothic UI Semilight", 0, 18)); // NOI18N
         jLabel_Koerier.setText("<NAAM>");
 
+        buttonGroup1.add(jOpgehaald);
+        jOpgehaald.setText("Opgehaald");
+
+        buttonGroup1.add(jAfgevelerd);
+        jAfgevelerd.setText("Afgeleverd");
+
+        buttonGroup1.add(jIncident);
+        jIncident.setText("Incident");
+
+        jIncidentBeschrijving.setColumns(20);
+        jIncidentBeschrijving.setRows(5);
+        jIncidentBeschrijving.setText("incident...");
+        jScrollPane1.setViewportView(jIncidentBeschrijving);
+
+        jVerzenden.setText("Verzenden");
+        jVerzenden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jVerzendenActionPerformed(evt);
+            }
+        });
+
+        jTerug.setText("Terug");
+        jTerug.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTerugActionPerformed(evt);
+            }
+        });
+
+        jWijziging.setForeground(new java.awt.Color(255, 51, 51));
+        jWijziging.setText("Wijzigingen zijn opgeslagen!");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -72,12 +109,24 @@ public class StatusPakket extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(310, 310, 310)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_ID)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(38, 38, 38)
                         .addComponent(jLabel_Koerier))
-                    .addComponent(jLabel_ID))
-                .addContainerGap(905, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jIncident, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jAfgevelerd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                        .addComponent(jOpgehaald, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jVerzenden)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jWijziging)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTerug))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(490, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -88,7 +137,20 @@ public class StatusPakket extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jLabel_Koerier))
-                .addContainerGap(516, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jOpgehaald, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jAfgevelerd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jIncident, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jVerzenden)
+                    .addComponent(jTerug)
+                    .addComponent(jWijziging))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -153,9 +215,6 @@ public class StatusPakket extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(StatusPakket.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
 
         /* Create and jLabel_ID the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -165,12 +224,22 @@ public class StatusPakket extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton jAfgevelerd;
+    private javax.swing.JRadioButton jIncident;
+    private javax.swing.JTextArea jIncidentBeschrijving;
     private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel jLabel_ID;
     private javax.swing.JLabel jLabel_Koerier;
+    private javax.swing.JRadioButton jOpgehaald;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jTerug;
+    private javax.swing.JButton jVerzenden;
+    private javax.swing.JLabel jWijziging;
     // End of variables declaration//GEN-END:variables
-    
+    private String gebruikersnaam;
+    private String pakketID;
     
 
 
