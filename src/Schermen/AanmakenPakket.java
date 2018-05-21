@@ -6,15 +6,9 @@
 package Schermen;
 
 import API.RouteCalculation;
-import Database.MysqlConnect;
+import Beheerder.Pakket;
 import java.awt.Color;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.BorderFactory;
 
 /**
@@ -52,46 +46,7 @@ public class AanmakenPakket extends javax.swing.JFrame {
         this.jLabel23.setText("Station " + to.get(0)); // eind station 
         
         this.jLabel12.setText("€" + price); // set price
-    }
-    
-    public void makeOrder(){
-        MysqlConnect dbconnection = new MysqlConnect();
-        dbconnection.connect();
-        Random generator = new Random(); 
-        int orderID = 0;
-        
-        try
-        {
-            
-            if(orderID == 0){
-                orderID = generator.nextInt(100000);
-            }
-            
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-            LocalDate deadline = LocalDate.now().plusDays(2);
-            // pakket record
-            try ( // create our mysql database connection
-                    Connection conn = dbconnection.connect()) {
-                // pakket record
-                String query = "INSERT INTO pakket VALUES ("+orderID+", \"aangemaakt\", NULL, \" "+from.get(0)+"\", \""+to.get(2)+"\", \""+from.get(1) + "\"  \"" + from.get(2) + "\"  \"" +  from.get(0)+"\", \""+to.get(0) + "\"  \"" + to.get(1) + "\"  \"" +  to.get(2)+"\", \""+deadline+"\", 0,0,"+this.isGreen+")";
-                Statement st = conn.createStatement();
-                int rs = st.executeUpdate(query);
-                
-                //pakket levering record
-                String query2 = "INSERT INTO pakketlevering VALUES ("+orderID+", NULL, \"test\", \"3.50\" )";
-                Statement st2 = conn.createStatement();
-                int rs2 = st.executeUpdate(query2);
-            }
-            orderID = 0;
-            
-            //switch to other screen
-            this.setVisible(false);
-            new PakketlijstDashboard(this.gebruikersnaam).setVisible(true);
-           
-        }catch (SQLException e){
-          System.err.println("Got an exception! ");
-          System.err.println(e.getMessage());
-        }
+        this.jLabel15.setText("€ 20");
     }
      
     /**
@@ -273,7 +228,7 @@ public class AanmakenPakket extends javax.swing.JFrame {
                 .addComponent(jLabel21)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel20)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jLabel12))
@@ -600,13 +555,13 @@ public class AanmakenPakket extends javax.swing.JFrame {
     private void jPanel3MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MousePressed
         this.jPanel3.setBorder(BorderFactory.createLineBorder(Color.black, 5));
         this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.white, 0));
-        this.isGreen = true;
+        Pakket.setIsGreen(true);
     }//GEN-LAST:event_jPanel3MousePressed
 
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
         this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.black, 5));
         this.jPanel3.setBorder(BorderFactory.createLineBorder(Color.white, 0));
-        this.isGreen = false;
+        Pakket.setIsGreen(false);
     }//GEN-LAST:event_jPanel4MousePressed
 
     private void jLabel31MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel31MouseClicked
@@ -617,9 +572,13 @@ public class AanmakenPakket extends javax.swing.JFrame {
     private void jLabel32MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel32MouseClicked
         if(this.isGreen != null){
             this.jLabel25.setVisible(false);
-            this.makeOrder();
+            if(Pakket.create(this.from, this.to)){
+                //switch to other screen
+                this.setVisible(false);
+                new PakketlijstDashboard(this.gebruikersnaam).setVisible(true);
+            }
         }else{
-            this.jLabel25.setVisible(true);
+            this.jLabel25.setVisible(true); //error label
         }
     }//GEN-LAST:event_jLabel32MouseClicked
 
@@ -636,10 +595,10 @@ public class AanmakenPakket extends javax.swing.JFrame {
                 !this.jTextField5.getText().isEmpty() &&
                 !this.jTextField8.getText().isEmpty()){
             
-            // Do api call
             this.from = new ArrayList<>();
             this.to = new ArrayList<>();
-            
+                        System.out.println("-------- 0");
+
             // Fill from data
             from.add(this.jTextField2.getText());
             from.add(this.jTextField3.getText());
@@ -649,7 +608,8 @@ public class AanmakenPakket extends javax.swing.JFrame {
             to.add(this.jTextField5.getText());
             to.add(this.jTextField6.getText());
             to.add(this.jTextField8.getText());
-
+            
+            System.out.println("-------- 1");
             
             RouteCalculation rc = new RouteCalculation(from, to);
             if(rc.getPrice() > 0){
@@ -660,7 +620,6 @@ public class AanmakenPakket extends javax.swing.JFrame {
             }
             this.jLabel30.setForeground(Color.white);
         }else{
-            // error msg
             this.jLabel30.setForeground(Color.black);
         }
     }//GEN-LAST:event_jLabel34MouseClicked
