@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class ColorInConsole {
     public static final String ANSI_RESET = "\u001B[0m";
-    public Map<String, String> colors = new HashMap<>();
+    public static Map<String, String> colors = new HashMap<>();
     
     public ColorInConsole(){
         colors.put("red", "\u001B[31m");
@@ -27,7 +27,7 @@ public class ColorInConsole {
         colors.put("white", "\u001B[37m");
     }
     
-    public void output(String color, String message){
+    public static void output(String color, String message){
         if(colors.containsKey(color)){
             System.out.println(colors.get(color) + message + ANSI_RESET);
         }else{

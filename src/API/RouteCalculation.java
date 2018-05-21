@@ -23,7 +23,9 @@ public final class RouteCalculation {
     private double totalPrice = 0.0;
     private Boolean usingTrainTransport = false;
     private long totalDistance = 0;
-    private boolean isGreen = true;
+    private boolean isGreen;
+    private Direction preStation;
+    private Direction afterStation;
 
     public RouteCalculation(ArrayList<String> from, ArrayList<String> to, boolean isGreen){
         this.from = from;
@@ -35,23 +37,24 @@ public final class RouteCalculation {
     public void doCalls(){
 
         // Heenweg fietskoerier
-        Direction preStation = new Direction(from.get(1) + "%20" + from.get(2) + "%20" + from.get(0), from.get(0) + "%20station", "bicycling", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
+        this.preStation = new Direction(from.get(1) + "%20" + from.get(2) + "%20" + from.get(0), from.get(0) + "%20station", "bicycling", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
         
         // api call 2
-        Direction afterStation = new Direction(to.get(0) + "%20station", to.get(1) + "%20" + to.get(2) + "%20" + to.get(0), "bicycling", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
+        this.afterStation = new Direction(to.get(0) + "%20station", to.get(1) + "%20" + to.get(2) + "%20" + to.get(0), "bicycling", "AIzaSyDGsj0SNnbYHEtz-Pr40fYKOrktoyQNz6s");        
         
         this.totalDistance = (preStation.getTravelDistance() / 1000) + (afterStation.getTravelDistance() / 1000);
-        System.out.println(Pakket.getGreen());
-        if(this.isGreen){
-            if(this.totalDistance > 54.5){
-            this.usingTrainTransport = true;        
-
-            totalPrice += this.calculatePrice(preStation.getTravelDistance() / 1000) + 3.50 + (this.calculatePrice(afterStation.getTravelDistance() / 1000));
-            }
+        this.updateTotalPrice(true);
+    }
+    
+    public void updateTotalPrice(boolean isGreen){
+        if(isGreen){
+            this.usingTrainTransport = true;       
+            totalPrice = this.calculatePrice(preStation.getTravelDistance() / 1000) + 3.50 + (this.calculatePrice(afterStation.getTravelDistance() / 1000));
         }else{
-            totalPrice += 20 + 3.50;
-        }
-        
+            totalPrice = 20 + 3.50;
+        }        
+        System.out.println(this.totalPrice);
+
     }
     
     public double calculatePrice(double dik){
@@ -78,6 +81,8 @@ public final class RouteCalculation {
     }
     
     public double getPrice(){
+        ColorInConsole.output("red", "OUTPUT");
+        System.out.println(this.totalPrice);
         return this.totalPrice;
     }
     

@@ -45,6 +45,11 @@ public class Pakket {
             try ( // create our mysql database connection
                 Connection conn = dbconnection.connect()) {                
                 LocalDate deadline = LocalDate.now().plusDays(2);
+                
+                if(isGreen == null){
+                    isGreen = false;
+                }
+                
                 // pakket record
                 String query = "INSERT INTO pakket VALUES ("+orderID+", \"aangemaakt\", NULL, \" "+from.get(0)+"\", \""+to.get(2)+"\", \""+deadline+"\", 0,0,"+Pakket.isGreen+", \""+from.get(1) + "\"  \"" + from.get(2) + "\"  \"" +  from.get(0)+"\", \""+to.get(0) + "\"  \"" + to.get(1) + "\"  \"" +  to.get(2)+"\")";
                 Statement st = conn.createStatement();

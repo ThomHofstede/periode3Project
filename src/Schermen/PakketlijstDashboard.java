@@ -29,7 +29,8 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
     private ArrayList<String> from;
     private ArrayList<String> to;
     private double price;
-    private Boolean isGreen;
+    private Boolean isGreen = true;
+    private RouteCalculation rc;
     /**
      * Creates new form Pakketlijstscherm
      * @param gebruikersnaam
@@ -83,7 +84,9 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                     
                     Date date = rs.getDate("deadline");
                     
-                    double o = rs.getInt("kosten");
+                    Float o = rs.getFloat("kosten");
+                    
+                    System.out.println(o);
                     String vs = rs.getString("vertrekstation");
                     String as = rs.getString("aankomststation");
                     String ps = rs.getString("pakketstatus");
@@ -194,9 +197,16 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                 "Pakket ID", "Bezorgkosten", "Treinkoerier", "Fietskoerier", "Deadline", "Vertrekstation", "Aankomststation", "Pakketstatus", "Incident - beschrijving"
             }
         ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Long.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false, false
             };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -249,7 +259,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -408,7 +418,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
+                        .addGap(71, 71, 71)
                         .addComponent(jLabel35))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
@@ -651,7 +661,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
                             .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addComponent(jLabel16)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -681,7 +691,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 1430, Short.MAX_VALUE)
                     .addContainerGap()))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
@@ -738,15 +748,13 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
     private void jPanel4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel4MousePressed
         this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.black, 5));
         this.jPanel5.setBorder(BorderFactory.createLineBorder(Color.white, 0));
-        this.isGreen = true;
-        Pakket.setIsGreen(true);
+        rc.updateTotalPrice(true);
     }//GEN-LAST:event_jPanel4MousePressed
 
     private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         this.jPanel5.setBorder(BorderFactory.createLineBorder(Color.black, 5));
         this.jPanel4.setBorder(BorderFactory.createLineBorder(Color.white, 0));
-        this.isGreen = false;
-        Pakket.setIsGreen(false);
+        rc.updateTotalPrice(false);
     }//GEN-LAST:event_jPanel5MousePressed
 
     private void jLabel37MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37MouseClicked
@@ -755,9 +763,9 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel37MouseClicked
 
     private void jLabel38MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel38MouseClicked
-        if(Pakket.getGreen() != null){
+        if(rc.getPrice() > 0){
             this.jLabel36.setVisible(false);
-            if(Pakket.create(this.from, this.to, this.price)){
+            if(Pakket.create(this.from, this.to, rc.getPrice())){
                 //switch to other screen
                 this.setVisible(false);
                 new PakketlijstDashboard(this.gebruikersnaam).setVisible(true);
@@ -777,7 +785,6 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
 
             this.from = new ArrayList<>();
             this.to = new ArrayList<>();
-            System.out.println("-------- 0");
 
             // Fill from data
             from.add(this.jTextField2.getText());
@@ -789,7 +796,7 @@ public final class PakketlijstDashboard extends javax.swing.JFrame {
             to.add(this.jTextField6.getText());
             to.add(this.jTextField8.getText());
 
-            RouteCalculation rc = new RouteCalculation(from, to, this.isGreen);
+            this.rc = new RouteCalculation(from, to, this.isGreen);
             if(rc.getPrice() > 0){
                 this.jPanel3.setVisible(false);
                 this.jPanel2.setVisible(true);

@@ -11,8 +11,8 @@ public class MysqlConnect {
     // init database constants
     private static final String DATABASE_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String DATABASE_URL = "jdbc:mysql://localhost/KBS?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC&autoReconnect=true&useSSL=false";
-    private static final String USERNAME = "root"; // 
-    private static final String PASSWORD = "1234";
+    private static final String USERNAME = "root"; 
+    private static final String PASSWORD = "root";
     private static final String MAX_POOL = "250";
 
     // init connection object
