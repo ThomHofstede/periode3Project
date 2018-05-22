@@ -26,8 +26,6 @@ public class Request{
     private String url;
     private JSONObject result = new JSONObject();
 
-    private final ColorInConsole cic = new ColorInConsole();
-
     public Request(String url){
         if(!url.isEmpty()){
             this.url = url;
@@ -54,13 +52,13 @@ public class Request{
                 JSONObject json = (JSONObject) parser.parse(re);
                 this.result = json;
                                
-                cic.output("green",  "Successful call to  " + url + ".");
+                ColorInConsole.output("green",  "Successful call to  " + url + ".");
             }else{
-                cic.output("red", "Response code: " + con.getResponseCode());
+                ColorInConsole.output("red", "Response code: " + con.getResponseCode());
             }
             
         }catch(IOException | ParseException e){
-            cic.output("red", e.toString());
+            ColorInConsole.output("red", e.toString());
         }
         
     }
