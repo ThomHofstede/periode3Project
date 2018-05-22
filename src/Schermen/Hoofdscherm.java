@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -166,10 +167,10 @@ public class Hoofdscherm extends javax.swing.JFrame {
     private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
         try {
             Desktop desktop = java.awt.Desktop.getDesktop();
-            URI oURL = new URI("http://www.google.com");
+            URI oURL;
+            oURL = new URI("https://mytnt.tnt.com/?locale=nl_NL#/registration/country-selection");
             desktop.browse(oURL);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (IOException | URISyntaxException e) {
         }
     }//GEN-LAST:event_jLabel7MouseClicked
 
