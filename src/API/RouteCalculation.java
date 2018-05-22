@@ -26,6 +26,7 @@ public final class RouteCalculation {
     private boolean isGreen;
     private Direction preStation;
     private Direction afterStation;
+    private double calcPrice;
 
     public RouteCalculation(ArrayList<String> from, ArrayList<String> to, boolean isGreen){
         this.from = from;
@@ -57,27 +58,20 @@ public final class RouteCalculation {
 
     }
     
-    public double calculatePrice(double dik){
-        double price = 0;
-        
-        System.out.println(dik);
-        if(this.usingTrainTransport){
-            price = (10+((dik - 25) * 0.39));
-        }else{
-            if(dik < 4){
-                price = 9;
-            }else if(dik > 4 && dik < 25){
-                price = 10;
-            }else if(dik > 25 && dik < 31){
-                price = (10+((dik - 25) * 0.39));
-            }else if(dik > 31 && dik < 40){
-                price = 12.50;
-            }else if(dik > 40 && dik < 54.5){
-                price = (10+((dik - 25) * 0.39));
-            }
+    public double calculatePrice(double dik){ 
+        if(dik < 4){
+            this.calcPrice = 9;
+        }else if(dik > 4 && dik < 25){
+            this.calcPrice = 10;
+        }else if(dik > 25 && dik < 31){
+            this.calcPrice = (10+((dik - 25) * 0.39));
+        }else if(dik > 31 && dik < 40){
+            this.calcPrice = 12.50;
+        }else if(dik > 40 && dik < 54.5){
+            this.calcPrice = (10+((dik - 25) * 0.39));
         }
         
-        return price;
+        return this.calcPrice;
     }
     
     public double getPrice(){
