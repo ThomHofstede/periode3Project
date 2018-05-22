@@ -6,6 +6,7 @@
 package Schermen;
 
 import Database.MysqlConnect;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,13 +24,13 @@ import javax.swing.table.TableModel;
  * @author Olink
  */
 public class SelecteerPakketStatus extends javax.swing.JFrame {
-
+    private Treinkoerier_dashboard td;
     /**
      * Creates new form SelecteerPakketStatus
      */
-    public SelecteerPakketStatus(String gebruikersnaam) {
+    public SelecteerPakketStatus(String gebruikersnaam, Treinkoerier_dashboard td) {
         initComponents();
-        
+        this.td=td;
         this.gebruikersnaam = gebruikersnaam;
         
         this.selecteerPakket();
@@ -224,10 +225,18 @@ public class SelecteerPakketStatus extends javax.swing.JFrame {
     
     
     private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        DefaultTableModel model = (DefaultTableModel)jTable3.getModel();
         int index = jTable3.getSelectedRow();
-        TableModel model = jTable3.getModel();
         
-        String tester =  model.getValueAt(index, 0).toString();
+        String test = model.getValueAt(index, 0).toString();
+        
+        new StatusIncident(this.gebruikersnaam, test).setVisible(true);
+        this.setVisible(false);
+        this.td.setVisible(false);
+
+        
+        
+        
         
 
         //StatusPakket jtRowData = new StatusPakket();
